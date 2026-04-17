@@ -1,0 +1,1 @@
+export{G as default}from"./embedpdf-aaf5ecf3.js";

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/logos/logo.png" />
+    <link rel="shortcut" href="/static/logos/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/rigan.css">
+    <link rel="stylesheet" type="text/css" href="/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/sweetalert.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/toastify.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/toastify.min.js"></script>
+    <script src="/static/js/sweetalert.min.js"></script>
+    <script src="/dist/semantic.min.js"></script> 
+    <title>Educa LMS</title>
+
+
+</head>
+<body>
+    <div class="page-load">
+        <div class="loader-con w-card">
+            <div class="loader"></div>
+            <div id="loader-text"></div>
+        </div>
+    </div>
+
+    <div class="container-view">
+
+        <div class="view new-login-view">
+            <header class="w-padding">
+                <div class="options">
+                    <div class="h3 fa fa-arrow-left back-btn"></div>
+                    <div class="h3 fa fa-cog"></div>
+                </div>
+                <div class="sch">
+                    <img src="" alt="" class="sch-img">
+                    <div class="h4 w-bold-x mt-3 sch-name"></div>
+                </div>
+            </header>
+
+            <form class="item login-form" id="new-login-form">
+                 
+                <div class="input-con">
+                    <label for="username">Enter your Student ID</label>
+                    <input type="text" id="username" placeholder="" required />
+                </div>
+                <div class="input-con">
+                    <label for="password">Enter your Password</label>
+                    <input type="password" id="npassword" placeholder="" required />
+                </div>
+                <div class="input-con">
+                    <input type="submit" value="Log In" />
+                </div>
+
+                <hr>
+                <h4>Is this your first time logging in?</h4>
+                <p>If you are a student, enter your student ID and your password.</p>
+                <p>If this is your first time, your password is your first name in upper case. (e.g JOHN)</p>
+            </form>
+            
+        </div>
+
+        <div class="view login-view">
+            <header class="w-padding">
+                <div class="options">
+                    <div class="h3 fa fa-arrow-left back-btn2"></div>
+                    <div class="h3 fa fa-cog"></div>
+                </div>
+                <div class="sch">
+                    <div class="h3 w-bold mb-3 sch-name"></div>
+                    <br>
+                    <div class="user-img">
+                        <div class="h3 w-bold user-initial"></div>
+                    </div>
+                    <div class="h5 w-bold mt-3 user-name"></div>
+                    
+                </div>
+            </header>
+
+            <form class="item login-form" id="login-form">
+                            
+
+                <div class="input-con">
+                    <label for="password">Enter your Password</label>
+                    <input type="password" id="password" placeholder="" required />
+
+                </div>
+
+                <div class="input-con">
+                    <input type="submit" value="Log In" />
+                </div>
+
+                <div class="bio-login">
+                    <i class="fa fa-fingerprint"></i>
+                    <p class="mt-2">Login with fingerprint</p>
+                </div>
+            </form>
+        </div>
+
+        <div class="view site-view">
+            <header class="w-padding w-center">
+                <img src="/static/logos/Logo (1).svg" alt="">
+            </header>
+            <form class="item login-form" id="school-form">
+                            
+                <h2 class="w-bold-x mt-3 mb-3">Connect to your Eduka LMS app</h2>
+                <br>
+                <div class="input-con mt-3">
+                    <label for="username">Search your school</label>
+                    <div class="autocomplete">
+                        <input type="text" id="school_name" placeholder="Type to search...">
+                        <div id="suggestions" class="suggestions"></div>
+                      </div>
+                </div>
+
+                <input type="hidden" id="school_id" value="">
+                
+                <div class="input-con">
+                    <input type="submit" value="Continue" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script src="/static/js/functions.js"></script>
+    <script type="module" src="/static/js/login.js"></script>
+
+</body>
+</html>

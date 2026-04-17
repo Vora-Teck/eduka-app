@@ -1,0 +1,229 @@
+<!-- ==================== GRAPH PLOTTER MODAL (Enhanced) ==================== -->
+<div id="graph-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+
+    <!-- Header -->
+    <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4 bg-white dark:bg-gray-900">
+        <button onclick="closeToolModal('graph-modal')" class="text-3xl text-gray-400 hover:text-gray-600">←</button>
+        <h2 class="font-bold text-2xl">Graph Plotter</h2>
+    </div>
+
+    <div class="flex-1 flex flex-col p-6 gap-6">
+
+        <!-- Input Controls -->
+        <div class="space-y-5">
+            <!-- Equation Input -->
+            <div>
+                <label class="block text-xs font-medium text-gray-500 mb-2">Equation (use 'x' as variable)</label>
+                <input id="graph-equation" type="text" value="x*x - 3*x + 2" 
+                       class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none text-base font-medium"
+                       placeholder="e.g. x*x - 3*x + 2 or 2*x + 1">
+            </div>
+
+            <!-- X Range -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-medium text-gray-500 mb-2">X Minimum</label>
+                    <input id="x-min" type="number" value="-10" 
+                           class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none text-center">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-500 mb-2">X Maximum</label>
+                    <input id="x-max" type="number" value="10" 
+                           class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none text-center">
+                </div>
+            </div>
+
+            <!-- Plot Button -->
+            <button onclick="plotEnhancedGraph()" 
+                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 rounded-3xl active:scale-95 transition">
+                Plot Graph &amp; Generate Table
+            </button>
+        </div>
+
+        <!-- Graph Canvas -->
+        <div class="flex-1 bg-white dark:bg-gray-800 rounded-3xl p-4 border border-gray-100 dark:border-gray-700">
+            <canvas id="graph-canvas" class="w-full h-full"></canvas>
+        </div>
+
+        <!-- Analysis & Table -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Solutions / Analysis -->
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-6">
+                <h3 class="font-semibold mb-4 text-emerald-600">Graph Analysis</h3>
+                <div id="graph-analysis" class="space-y-4 text-sm">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Table of Values -->
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-6 overflow-auto max-h-80">
+                <h3 class="font-semibold mb-4">Table of Values</h3>
+                <table id="value-table" class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b dark:border-gray-700">
+                            <th class="py-3 text-left font-medium">x</th>
+                            <th class="py-3 text-right font-medium">y = f(x)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body" class="font-mono">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let canvas, ctx;
+
+    function plotEnhancedGraph() {
+        canvas = document.getElementById('graph-canvas');
+        ctx = canvas.getContext('2d');
+        
+        const width = canvas.offsetWidth;
+        const height = canvas.offsetHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        ctx.clearRect(0, 0, width, height);
+
+        const equation = $('#graph-equation').val().trim();
+        let xMin = parseFloat($('#x-min').val()) || -10;
+        let xMax = parseFloat($('#x-max').val()) || 10;
+
+        if (xMin >= xMax) {
+            showToast("X Minimum must be less than X Maximum", true);
+            return;
+        }
+
+        // Draw grid and axes
+        drawGraphGrid(xMin, xMax, width, height);
+
+        // Plot the function
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+
+        const step = (xMax - xMin) / 300;
+        let firstPoint = true;
+
+        for (let x = xMin; x <= xMax; x += step) {
+            try {
+                // Safely evaluate the function
+                let y = eval(equation.replace(/x/g, `(${x})`));
+                if (isNaN(y) || !isFinite(y)) continue;
+
+                const px = 50 + (x - xMin) * (width - 100) / (xMax - xMin);
+                const py = height - 50 - (y + 10) * (height - 100) / 30; // scale y
+
+                if (firstPoint) {
+                    ctx.moveTo(px, py);
+                    firstPoint = false;
+                } else {
+                    ctx.lineTo(px, py);
+                }
+            } catch(e) {}
+        }
+        ctx.stroke();
+
+        // Generate Table of Values
+        generateValueTable(equation, xMin, xMax);
+
+        // Analyze Graph
+        analyzeGraph(equation);
+    }
+
+    function drawGraphGrid(xMin, xMax, w, h) {
+        ctx.strokeStyle = '#e5e7eb';
+        ctx.lineWidth = 1;
+
+        // Horizontal lines
+        for (let i = -10; i <= 10; i++) {
+            const y = h - 50 - (i + 10) * (h - 100) / 30;
+            ctx.beginPath();
+            ctx.moveTo(40, y);
+            ctx.lineTo(w - 40, y);
+            ctx.stroke();
+        }
+
+        // Vertical lines
+        for (let i = Math.floor(xMin); i <= Math.ceil(xMax); i++) {
+            const x = 50 + (i - xMin) * (w - 100) / (xMax - xMin);
+            ctx.beginPath();
+            ctx.moveTo(x, 40);
+            ctx.lineTo(x, h - 40);
+            ctx.stroke();
+        }
+
+        // Axes
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(40, h/2);
+        ctx.lineTo(w - 40, h/2);     // x-axis
+        ctx.moveTo(w/2, 40);
+        ctx.lineTo(w/2, h - 40);     // y-axis
+        ctx.stroke();
+    }
+
+    function generateValueTable(equation, xMin, xMax) {
+        let html = '';
+        const step = (xMax - xMin) / 12;
+
+        for (let x = xMin; x <= xMax; x += step) {
+            try {
+                let y = eval(equation.replace(/x/g, `(${x})`));
+                y = isNaN(y) ? '—' : y.toFixed(3);
+                html += `
+                <tr class="border-b dark:border-gray-700 last:border-none">
+                    <td class="py-3">${x.toFixed(2)}</td>
+                    <td class="py-3 text-right font-medium">${y}</td>
+                </tr>`;
+            } catch(e) {}
+        }
+        $('#table-body').html(html);
+    }
+
+    function analyzeGraph(equation) {
+        let analysisHTML = `<div class="space-y-3">`;
+        
+        try {
+            // Simple root finding (demo - checks for sign change)
+            let roots = [];
+            for (let x = -10; x <= 10; x += 0.1) {
+                let y1 = eval(equation.replace(/x/g, `(${x})`));
+                let y2 = eval(equation.replace(/x/g, `(${x+0.1})`));
+                if (y1 * y2 < 0) {
+                    roots.push(x.toFixed(2));
+                }
+            }
+
+            analysisHTML += `
+                <div>
+                    <span class="text-xs text-gray-500">Equation</span>
+                    <div class="font-mono text-emerald-600">${equation}</div>
+                </div>
+                <div>
+                    <span class="text-xs text-gray-500">Roots (approximate)</span>
+                    <div class="font-medium">${roots.length ? roots.join(', ') : 'No real roots in range'}</div>
+                </div>
+                <div>
+                    <span class="text-xs text-gray-500">Y-Intercept (x=0)</span>
+                    <div class="font-medium">${eval(equation.replace(/x/g, '(0)')).toFixed(3)}</div>
+                </div>
+            `;
+        } catch(e) {
+            analysisHTML += `<div class="text-red-500">Could not analyze equation</div>`;
+        }
+        
+        analysisHTML += `</div>`;
+        $('#graph-analysis').html(analysisHTML);
+    }
+
+    // Make functions globally accessible
+    window.plotEnhancedGraph = plotEnhancedGraph;
+    window.analyzeGraph = analyzeGraph;
+    window.generateValueTable = generateValueTable;
+</script>

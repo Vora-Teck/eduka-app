@@ -1,0 +1,425 @@
+<!-- ==================== TOOLS PAGE ==================== -->
+<section id="tools-page" class="section hidden bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+
+    <!-- Header -->
+    <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold tracking-tight">Academic Tools</h1>
+            <div onclick="toggleDarkMode()" 
+                 class="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center cursor-pointer active:scale-95 transition">
+                <i id="tools-theme-icon" class="fa-solid fa-moon text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-6 pt-6">
+        <div class="grid grid-cols-2 gap-4" id="tools-grid">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- ==================== SUB-MODALS ==================== -->
+
+    <!-- Dictionary Modal -->
+    <div id="dictionary-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+            <button onclick="closeToolModal('dictionary-modal')" class="text-3xl text-gray-400">←</button>
+            <h2 class="font-bold text-2xl">Dictionary</h2>
+        </div>
+        <div class="p-6">
+            <div class="relative mb-6">
+                <input id="dict-search" type="text" placeholder="Search any word..." 
+                       class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-5 outline-none text-base" 
+                       onkeyup="if(event.key==='Enter') searchDictionary()">
+                <button onclick="searchDictionary()" 
+                        class="absolute right-4 top-1/2 -translate-y-1/2 bg-emerald-600 text-white px-6 py-2 rounded-2xl text-sm">Search</button>
+            </div>
+            <div id="dictionary-result" class="min-h-[300px] text-center text-gray-400 py-10">
+                Type a word and tap Search
+            </div>
+        </div>
+    </div>
+
+    <!-- Scientific Calculator Modal -->
+    <div id="calculator-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+            <button onclick="closeToolModal('calculator-modal')" class="text-3xl text-gray-400">←</button>
+            <h2 class="font-bold text-2xl">Scientific Calculator</h2>
+        </div>
+        <div class="flex-1 p-6 flex flex-col">
+            <div id="calc-display" 
+                 class="bg-gray-900 text-white text-right text-5xl font-light p-6 rounded-3xl mb-6 min-h-[90px] flex items-center justify-end overflow-hidden">
+                0
+            </div>
+            <div class="grid grid-cols-4 gap-3 flex-1 text-lg">
+                <!-- Calculator buttons populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Unit Converter Modal -->
+    <div id="converter-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+            <button onclick="closeToolModal('converter-modal')" class="text-3xl text-gray-400">←</button>
+            <h2 class="font-bold text-2xl">Unit Converter</h2>
+        </div>
+        <div class="p-6 space-y-8">
+            <div>
+                <select id="converter-category" onchange="loadConverterUnits()" 
+                        class="w-full bg-white dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none">
+                    <option value="length">Length</option>
+                    <option value="weight">Weight</option>
+                    <option value="temperature">Temperature</option>
+                    <option value="volume">Volume</option>
+                </select>
+            </div>
+            
+            <div class="flex gap-4 items-center">
+                <div class="flex-1">
+                    <input id="input-value" type="number" value="1" 
+                           class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-5 text-3xl outline-none text-center">
+                </div>
+                <select id="from-unit" onchange="convertUnits()" class="bg-white dark:bg-gray-800 rounded-3xl px-4 py-5 outline-none"></select>
+            </div>
+            
+            <div class="text-center text-4xl text-gray-300">↓</div>
+            
+            <div class="flex gap-4 items-center">
+                <div class="flex-1">
+                    <input id="output-value" type="text" readonly 
+                           class="w-full bg-emerald-50 dark:bg-emerald-900/30 rounded-3xl px-6 py-5 text-3xl outline-none text-center font-semibold">
+                </div>
+                <select id="to-unit" onchange="convertUnits()" class="bg-white dark:bg-gray-800 rounded-3xl px-4 py-5 outline-none"></select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mathematical Tables Modal -->
+    <div id="tables-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+            <button onclick="closeToolModal('tables-modal')" class="text-3xl text-gray-400">←</button>
+            <h2 class="font-bold text-2xl">Math Tables</h2>
+        </div>
+        <div class="p-6">
+            <div class="flex gap-2 mb-6 overflow-x-auto">
+                <button onclick="showTable('sine')" class="math-tab-btn active px-6 py-2 rounded-3xl text-sm">Sine</button>
+                <button onclick="showTable('cosine')" class="math-tab-btn px-6 py-2 rounded-3xl text-sm">Cosine</button>
+                <button onclick="showTable('tangent')" class="math-tab-btn px-6 py-2 rounded-3xl text-sm">Tangent</button>
+                <button onclick="showTable('log')" class="math-tab-btn px-6 py-2 rounded-3xl text-sm">Log</button>
+            </div>
+            <div id="math-table-content" class="bg-white dark:bg-gray-800 rounded-3xl p-6 overflow-auto max-h-[500px]">
+                <!-- Table populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Graph Plotter Modal -->
+    <div id="graph-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+            <button onclick="closeToolModal('graph-modal')" class="text-3xl text-gray-400">←</button>
+            <h2 class="font-bold text-2xl">Graph Plotter</h2>
+        </div>
+        <div class="flex-1 p-6 flex flex-col">
+            <canvas id="graph-canvas" class="flex-1 bg-white dark:bg-gray-800 rounded-3xl"></canvas>
+            <div class="mt-6">
+                <input id="graph-function" type="text" value="x*x" 
+                       class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none" placeholder="Enter function e.g. x*x or Math.sin(x)">
+                <button onclick="plotGraph()" 
+                        class="mt-4 w-full bg-emerald-600 text-white py-4 rounded-3xl font-semibold">Plot Graph</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Periodic Table Modal -->
+    <div id="periodic-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+            <button onclick="closeToolModal('periodic-modal')" class="text-3xl text-gray-400">←</button>
+            <h2 class="font-bold text-2xl">Periodic Table</h2>
+        </div>
+        <div class="flex-1 p-6 overflow-auto">
+            <div id="periodic-table" class="grid grid-cols-18 gap-1 text-xs">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tools Data
+        const tools = [
+            { id: "dictionary", name: "Dictionary", icon: "📖", color: "emerald" },
+            { id: "calculator", name: "Scientific Calculator", icon: "🔢", color: "violet" },
+            { id: "converter", name: "Unit Converter", icon: "📏", color: "amber" },
+            { id: "tables", name: "Math Tables", icon: "📊", color: "blue" },
+            { id: "graph", name: "Graph Plotter", icon: "📈", color: "rose" },
+            { id: "periodic", name: "Periodic Table", icon: "🧪", color: "teal" }
+        ];
+
+        // Render Tools Grid
+        function renderToolsGrid() {
+            let html = '';
+            tools.forEach(tool => {
+                html += `
+                <div onclick="openTool('${tool.id}')" 
+                     class="bg-white dark:bg-gray-900 rounded-3xl p-6 flex flex-col items-center justify-center gap-4 active:scale-95 transition cursor-pointer border border-transparent hover:border-${tool.color}-200">
+                    <div class="w-16 h-16 bg-\( {tool.color}-100 dark:bg- \){tool.color}-900/30 rounded-3xl flex items-center justify-center text-4xl">
+                        ${tool.icon}
+                    </div>
+                    <div class="font-medium text-center">${tool.name}</div>
+                </div>`;
+            });
+            $('#tools-grid').html(html);
+        }
+
+        // Open Tool Modal
+        function openTool(toolId) {
+            \( ('.hidden[id \)="-modal"]').addClass('hidden');
+            \( (`# \){toolId}-modal`).removeClass('hidden').addClass('flex');
+            
+            if (toolId === 'calculator') initCalculator();
+            if (toolId === 'converter') loadConverterUnits();
+            if (toolId === 'tables') showTable('sine');
+            if (toolId === 'graph') plotGraph();
+            if (toolId === 'periodic') renderPeriodicTable();
+        }
+
+        function closeToolModal(modalId) {
+            \( (`# \){modalId}`).addClass('hidden').removeClass('flex');
+        }
+
+        // Dictionary (using Free Dictionary API)
+        async function searchDictionary() {
+            const word = $('#dict-search').val().trim().toLowerCase();
+            if (!word) return;
+            
+            const resultDiv = $('#dictionary-result');
+            resultDiv.html('<div class="animate-pulse">Looking up...</div>');
+            
+            try {
+                const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                const data = await res.json();
+                
+                if (Array.isArray(data)) {
+                    const entry = data[0];
+                    let html = `
+                        <div class="text-left">
+                            <div class="text-4xl font-bold mb-2">${entry.word}</div>
+                            <div class="text-emerald-600">${entry.phonetic || ''}</div>
+                            <div class="mt-6 space-y-6">`;
+                    
+                    entry.meanings.forEach(meaning => {
+                        html += `<div>
+                            <div class="font-medium text-violet-600">${meaning.partOfSpeech}</div>`;
+                        meaning.definitions.forEach((def, i) => {
+                            html += `<div class="mt-3 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+                                <div>${def.definition}</div>
+                                \( {def.example ? `<div class="text-xs text-gray-500 mt-2">" \){def.example}"</div>` : ''}
+                            </div>`;
+                        });
+                        html += `</div>`;
+                    });
+                    html += `</div></div>`;
+                    resultDiv.html(html);
+                } else {
+                    resultDiv.html(`<div class="text-red-500">Word not found</div>`);
+                }
+            } catch(e) {
+                resultDiv.html(`<div class="text-red-500">Connection error. Try again.</div>`);
+            }
+        }
+
+        // Scientific Calculator
+        let calcDisplay = '0';
+        let prevValue = '';
+        let operator = '';
+        
+        function initCalculator() {
+            const buttons = [
+                'C','+/-','%','÷',
+                '7','8','9','×',
+                '4','5','6','-',
+                '1','2','3','+',
+                '0','.','sin','cos',
+                'tan','log','√','='
+            ];
+            
+            let html = '';
+            buttons.forEach(btn => {
+                let extraClass = '';
+                if (['÷','×','-','+','='].includes(btn)) extraClass = 'bg-emerald-600 text-white';
+                if (['C','+/-','%'].includes(btn)) extraClass = 'text-gray-400';
+                
+                html += `<button onclick="handleCalcInput('${btn}')" 
+                                class="h-14 rounded-2xl text-xl font-medium \( {extraClass}"> \){btn}</button>`;
+            });
+            $('#calculator-modal .grid').html(html);
+            calcDisplay = '0';
+            updateCalcDisplay();
+        }
+
+        function handleCalcInput(val) {
+            if (val === 'C') {
+                calcDisplay = '0';
+                prevValue = '';
+                operator = '';
+            } else if (['+','-','×','÷'].includes(val)) {
+                prevValue = calcDisplay;
+                operator = val;
+                calcDisplay = '0';
+            } else if (val === '=') {
+                calculateResult();
+            } else if (['sin','cos','tan','log','√'].includes(val)) {
+                calculateScientific(val);
+            } else {
+                if (calcDisplay === '0' && val !== '.') calcDisplay = val;
+                else calcDisplay += val;
+            }
+            updateCalcDisplay();
+        }
+
+        function calculateResult() {
+            let result = 0;
+            const a = parseFloat(prevValue);
+            const b = parseFloat(calcDisplay);
+            
+            switch(operator) {
+                case '+': result = a + b; break;
+                case '-': result = a - b; break;
+                case '×': result = a * b; break;
+                case '÷': result = a / b; break;
+            }
+            calcDisplay = result.toString();
+        }
+
+        function calculateScientific(func) {
+            const num = parseFloat(calcDisplay);
+            switch(func) {
+                case 'sin': calcDisplay = Math.sin(num * Math.PI/180).toFixed(6); break;
+                case 'cos': calcDisplay = Math.cos(num * Math.PI/180).toFixed(6); break;
+                case 'tan': calcDisplay = Math.tan(num * Math.PI/180).toFixed(6); break;
+                case 'log': calcDisplay = Math.log10(num).toFixed(6); break;
+                case '√': calcDisplay = Math.sqrt(num).toFixed(6); break;
+            }
+        }
+
+        function updateCalcDisplay() {
+            $('#calc-display').text(calcDisplay);
+        }
+
+        // Unit Converter
+        const converters = {
+            length: { units: ["Meter", "Kilometer", "Centimeter", "Inch", "Foot"], factor: [1, 0.001, 100, 39.37, 3.28] },
+            weight: { units: ["Kilogram", "Gram", "Pound", "Ounce"], factor: [1, 1000, 2.205, 35.27] },
+            temperature: { units: ["Celsius", "Fahrenheit", "Kelvin"], factor: null },
+            volume: { units: ["Liter", "Milliliter", "Gallon"], factor: [1, 1000, 0.264] }
+        };
+
+        function loadConverterUnits() {
+            const category = $('#converter-category').val();
+            const data = converters[category];
+            
+            let fromHTML = '', toHTML = '';
+            data.units.forEach((unit, i) => {
+                fromHTML += `<option value="\( {i}"> \){unit}</option>`;
+                toHTML += `<option value="\( {i}"> \){unit}</option>`;
+            });
+            
+            $('#from-unit').html(fromHTML);
+            $('#to-unit').html(toHTML);
+            convertUnits();
+        }
+
+        function convertUnits() {
+            const category = $('#converter-category').val();
+            const val = parseFloat($('#input-value').val()) || 0;
+            const from = parseInt($('#from-unit').val());
+            const to = parseInt($('#to-unit').val());
+            
+            let result = val;
+            
+            if (category === 'temperature') {
+                // Simple C to F conversion for demo
+                if (from === 0 && to === 1) result = (val * 9/5) + 32;
+                else if (from === 1 && to === 0) result = (val - 32) * 5/9;
+            } else {
+                const data = converters[category];
+                result = val * (data.factor[to] / data.factor[from]);
+            }
+            
+            $('#output-value').val(result.toFixed(4));
+        }
+
+        // Math Tables
+        function showTable(type) {
+            $('.math-tab-btn').removeClass('active');
+            \( (`.math-tab-btn:contains( \){type.charAt(0).toUpperCase() + type.slice(1)})`).addClass('active');
+            
+            let html = `<table class="w-full text-sm"><thead><tr class="border-b"><th class="py-3 text-left">x</th><th class="py-3 text-right">Value</th></tr></thead><tbody>`;
+            
+            for (let i = 0; i <= 360; i += 15) {
+                let val = 0;
+                if (type === 'sine') val = Math.sin(i * Math.PI/180).toFixed(4);
+                else if (type === 'cosine') val = Math.cos(i * Math.PI/180).toFixed(4);
+                else if (type === 'tangent') val = Math.tan(i * Math.PI/180).toFixed(4);
+                else if (type === 'log') val = Math.log10(i || 1).toFixed(4);
+                
+                html += `<tr class="border-b last:border-none"><td class="py-3">\( {i}</td><td class="py-3 text-right font-medium"> \){val}</td></tr>`;
+            }
+            html += `</tbody></table>`;
+            $('#math-table-content').html(html);
+        }
+
+        // Graph Plotter (using Canvas)
+        let canvas, ctx;
+        function plotGraph() {
+            canvas = document.getElementById('graph-canvas');
+            ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw axes
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(40, 40);
+            ctx.lineTo(40, canvas.height - 40);
+            ctx.lineTo(canvas.width - 40, canvas.height - 40);
+            ctx.stroke();
+            
+            // Plot sample function (x^2)
+            ctx.strokeStyle = '#eab308';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            for (let x = -10; x <= 10; x += 0.1) {
+                const y = eval($('#graph-function').val().replace(/x/g, x)) || 0;
+                const px = 40 + (x + 10) * (canvas.width - 80) / 20;
+                const py = canvas.height - 40 - (y + 10) * (canvas.height - 80) / 20;
+                if (x === -10) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+        }
+
+        // Periodic Table (simple version)
+        function renderPeriodicTable() {
+            const elements = [
+                {num:1,sym:"H",name:"Hydrogen",color:"#a3e635"},
+                {num:2,sym:"He",name:"Helium",color:"#67e8f9"},
+                // ... more can be added, keeping short for demo
+            ];
+            
+            let html = '';
+            for (let i = 1; i <= 118; i++) {
+                html += `<div onclick="showElementInfo(${i})" 
+                            class="aspect-square border border-gray-200 dark:border-gray-700 rounded-xl flex flex-col items-center justify-center text-xs font-medium cursor-pointer hover:scale-110 transition">
+                            <div class="text-[10px] text-gray-400">${i}</div>
+                            <div class="text-lg">H</div>
+                        </div>`;
+            }
+            $('#periodic-table').html(html);
+        }
+
+        function showElementInfo(num) {
+ 

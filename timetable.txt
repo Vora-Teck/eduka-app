@@ -1,0 +1,255 @@
+<!-- ==================== TIMETABLE PAGE ==================== -->
+<section id="timetable-page" class="section hidden bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+
+    <!-- Header -->
+    <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold tracking-tight">Timetable</h1>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleViewMode()" 
+                        id="view-mode-btn"
+                        class="px-5 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl text-sm font-medium flex items-center gap-2 active:scale-95 transition">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span id="view-mode-text">Weekly</span>
+                </button>
+                <div onclick="toggleDarkMode()" 
+                     class="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center cursor-pointer active:scale-95 transition">
+                    <i class="fa-solid fa-moon text-lg"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-6 pt-6">
+        
+        <!-- Day Selector -->
+        <div class="flex gap-2 overflow-x-auto pb-4 scrollbar-hide" id="day-selector">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Timetable Content -->
+        <div id="timetable-content" class="space-y-6">
+            <!-- Dynamically loaded by JS -->
+        </div>
+    </div>
+
+    <!-- ==================== PERIOD DETAIL MODAL ==================== -->
+    <div id="period-detail-modal" 
+         class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4 bg-white dark:bg-gray-900">
+            <button onclick="closePeriodDetail()" class="text-3xl text-gray-400 hover:text-gray-600">←</button>
+            <div class="flex-1">
+                <h2 id="modal-period-time" class="font-bold text-2xl"></h2>
+                <p id="modal-period-subject" class="text-emerald-600 font-medium"></p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-auto p-6 space-y-8">
+            
+            <!-- Class Information -->
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-6">
+                <div class="grid grid-cols-2 gap-6 text-sm">
+                    <div>
+                        <span class="text-gray-500 block mb-1">Teacher</span>
+                        <span id="modal-teacher" class="font-medium"></span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 block mb-1">Room</span>
+                        <span id="modal-room" class="font-medium"></span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 block mb-1">Duration</span>
+                        <span id="modal-duration" class="font-medium"></span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 block mb-1">Type</span>
+                        <span id="modal-type" class="font-medium text-emerald-600"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="showToast('Opening lesson notes...')" 
+                        class="bg-white dark:bg-gray-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-gray-200 dark:border-gray-700 rounded-3xl py-6 flex flex-col items-center gap-2 active:scale-95 transition">
+                    <i class="fa-solid fa-book text-2xl text-emerald-600"></i>
+                    <span class="text-sm font-medium">Lesson Notes</span>
+                </button>
+                
+                <button onclick="showToast('Opening class materials...')" 
+                        class="bg-white dark:bg-gray-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-gray-200 dark:border-gray-700 rounded-3xl py-6 flex flex-col items-center gap-2 active:scale-95 transition">
+                    <i class="fa-solid fa-folder-open text-2xl text-violet-600"></i>
+                    <span class="text-sm font-medium">Materials</span>
+                </button>
+            </div>
+
+            <!-- Today's Topic -->
+            <div>
+                <h3 class="text-sm font-medium text-gray-500 mb-3">TODAY'S TOPIC</h3>
+                <div id="modal-topic" 
+                     class="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 p-6 rounded-3xl">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample Timetable API Response (as described)
+        const timetableData = {
+            monday: {
+                periods: [
+                    { start: "08:00", end: "09:00", subject: { id: 1, name: "Mathematics" }, teacher: "Mrs. Adebayo", room: "Room 12", type: "Theory" },
+                    { start: "09:15", end: "10:15", subject: { id: 2, name: "English Literature" }, teacher: "Mr. Oladimeji", room: "Hall B", type: "Literature" },
+                    { start: "10:30", end: "11:30", subject: { id: 3, name: "Biology" }, teacher: "Miss Chidinma", room: "Lab 1", type: "Practical" }
+                ]
+            },
+            tuesday: {
+                periods: [
+                    { start: "08:00", end: "09:00", subject: { id: 4, name: "Physics" }, teacher: "Mr. Emmanuel", room: "Room 8", type: "Theory" },
+                    { start: "09:15", end: "10:15", subject: { id: 1, name: "Mathematics" }, teacher: "Mrs. Adebayo", room: "Room 12", type: "Theory" }
+                ]
+            },
+            wednesday: {
+                periods: [
+                    { start: "08:00", end: "09:00", subject: { id: 3, name: "Biology" }, teacher: "Miss Chidinma", room: "Lab 1", type: "Practical" },
+                    { start: "09:15", end: "10:15", subject: { id: 5, name: "Chemistry" }, teacher: "Mrs. Fatima", room: "Lab 2", type: "Theory" },
+                    { start: "11:00", end: "12:00", subject: { id: 2, name: "English Literature" }, teacher: "Mr. Oladimeji", room: "Hall B", type: "Literature" }
+                ]
+            },
+            thursday: {
+                periods: [
+                    { start: "08:00", end: "09:00", subject: { id: 1, name: "Mathematics" }, teacher: "Mrs. Adebayo", room: "Room 12", type: "Theory" },
+                    { start: "09:15", end: "10:15", subject: { id: 6, name: "History" }, teacher: "Mr. Kingsley", room: "Room 5", type: "Theory" }
+                ]
+            },
+            friday: {
+                periods: [
+                    { start: "08:00", end: "09:00", subject: { id: 3, name: "Biology" }, teacher: "Miss Chidinma", room: "Lab 1", type: "Practical" },
+                    { start: "09:15", end: "10:15", subject: { id: 4, name: "Physics" }, teacher: "Mr. Emmanuel", room: "Room 8", type: "Theory" },
+                    { start: "11:00", end: "12:00", subject: { id: 2, name: "English Literature" }, teacher: "Mr. Oladimeji", room: "Hall B", type: "Literature" }
+                ]
+            }
+        };
+
+        const days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+
+        // Populate Day Selector
+        function populateDaySelector() {
+            let html = '';
+            const today = new Date().getDay(); // 0=Sun, 1=Mon ...
+            const todayIndex = today === 0 ? 0 : today - 1; // Monday = 0 in our array
+
+            days.forEach((day, index) => {
+                const isToday = index === todayIndex;
+                html += `
+                <button onclick="loadDay('${day}')" 
+                        class="day-btn min-w-[90px] px-6 py-3 rounded-3xl text-sm font-medium whitespace-nowrap transition-all
+                        ${isToday ? 'bg-emerald-600 text-white shadow-lg' : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'}">
+                    ${day.charAt(0).toUpperCase() + day.slice(1)}
+                </button>`;
+            });
+            $('#day-selector').html(html);
+        }
+
+        // Load Timetable for a specific day
+        function loadDay(day) {
+            $('.day-btn').removeClass('bg-emerald-600 text-white shadow-lg').addClass('bg-white dark:bg-gray-800');
+            $(`.day-btn:contains(${day.charAt(0).toUpperCase() + day.slice(1)})`).addClass('bg-emerald-600 text-white shadow-lg');
+
+            const dayData = timetableData[day];
+            if (!dayData) return;
+
+            let html = `<h2 class="text-xl font-semibold mb-5 capitalize">${day}'s Schedule</h2>`;
+
+            dayData.periods.forEach((period, i) => {
+                html += `
+                <div onclick="openPeriodDetail('${day}', ${i})" 
+                     class="bg-white dark:bg-gray-900 rounded-3xl p-6 mb-4 active:scale-[0.98] transition cursor-pointer border border-transparent hover:border-emerald-200">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-emerald-600 font-mono text-sm">${period.start} - ${period.end}</div>
+                            <div class="text-2xl font-semibold mt-1">${period.subject.name}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 px-4 py-1 rounded-2xl">${period.type}</div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex items-center gap-4 text-sm text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-user"></i>
+                            <span>${period.teacher}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-door-open"></i>
+                            <span>${period.room}</span>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            $('#timetable-content').html(html);
+        }
+
+        // Open Period Detail Modal
+        function openPeriodDetail(day, periodIndex) {
+            const period = timetableData[day].periods[periodIndex];
+            
+            $('#modal-period-time').text(`${period.start} - ${period.end}`);
+            $('#modal-period-subject').text(period.subject.name);
+            $('#modal-teacher').text(period.teacher);
+            $('#modal-room').text(period.room);
+            $('#modal-duration').text(`${calculateDuration(period.start, period.end)} minutes`);
+            $('#modal-type').text(period.type);
+
+            // Sample topic for the period
+            $('#modal-topic').html(`
+                <div class="font-medium mb-2">Today's Topic:</div>
+                <div class="text-lg">"${period.subject.name === 'Mathematics' ? 'Solving Quadratic Equations' : 
+                                      period.subject.name === 'Biology' ? 'Cell Structure and Function' : 
+                                      'Introduction to Literary Devices'}"</div>
+            `);
+
+            $('#period-detail-modal').removeClass('hidden').addClass('flex');
+        }
+
+        function closePeriodDetail() {
+            $('#period-detail-modal').addClass('hidden').removeClass('flex');
+        }
+
+        function calculateDuration(start, end) {
+            const [sh, sm] = start.split(':').map(Number);
+            const [eh, em] = end.split(':').map(Number);
+            return (eh * 60 + em) - (sh * 60 + sm);
+        }
+
+        // Toggle between Weekly and Daily view (demo)
+        let isWeeklyView = false;
+        function toggleViewMode() {
+            isWeeklyView = !isWeeklyView;
+            $('#view-mode-text').text(isWeeklyView ? 'Daily' : 'Weekly');
+            showToast(isWeeklyView ? 'Switched to Daily View' : 'Switched to Weekly View');
+            
+            // For demo, reload Monday when switching
+            if (!isWeeklyView) loadDay('monday');
+        }
+
+        // Initialize Timetable Page
+        $(document).ready(function() {
+            populateDaySelector();
+            // Load today's timetable by default (Monday for demo)
+            loadDay('monday');
+            
+            console.log('%c⏰ Timetable Page Loaded Successfully', 'color:#10b981; font-weight:600');
+        });
+
+        // Global functions
+        window.loadDay = loadDay;
+        window.openPeriodDetail = openPeriodDetail;
+        window.closePeriodDetail = closePeriodDetail;
+        window.toggleViewMode = toggleViewMode;
+        window.toggleDarkMode = toggleDarkMode; // Reuse from main app
+        window.showToast = showToast;         // Reuse from main app
+    </script>
+</section>

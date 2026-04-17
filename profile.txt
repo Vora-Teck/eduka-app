@@ -1,0 +1,365 @@
+<!-- ==================== PROFILE PAGE ==================== -->
+<section id="profile-page" class="section hidden bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+
+    <!-- Header -->
+    <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold tracking-tight">My Profile</h1>
+            <div onclick="toggleDarkMode()" 
+                 class="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center cursor-pointer active:scale-95 transition">
+                <i id="profile-theme-icon" class="fa-solid fa-moon text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-6 pt-6 space-y-8">
+
+        <!-- Profile Header Card -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 flex items-center gap-5">
+            <div class="w-20 h-20 bg-emerald-100 dark:bg-emerald-900 rounded-3xl flex items-center justify-center text-5xl flex-shrink-0">
+                👦
+            </div>
+            <div class="flex-1">
+                <h2 class="text-3xl font-bold">Hassan</h2>
+                <p class="text-emerald-600 font-medium">STU-20241234 • SS2 Science</p>
+                <button onclick="editProfile()" 
+                        class="mt-4 text-xs px-5 py-2 bg-emerald-600 text-white rounded-3xl flex items-center gap-2 active:scale-95 transition">
+                    <i class="fa-solid fa-pen"></i>
+                    <span>Edit Profile</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Personal Details -->
+        <div>
+            <h3 class="px-1 text-sm font-semibold text-gray-500 mb-3">PERSONAL DETAILS</h3>
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 space-y-5">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Full Name</span>
+                    <span class="font-medium">Hassan Olamide Adeyemi</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Gender</span>
+                    <span class="font-medium">Male</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Date of Birth</span>
+                    <span class="font-medium">15 March 2010</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Student ID</span>
+                    <span class="font-medium">STU-20241234</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Address</span>
+                    <span class="font-medium text-right">12 Adeola Street,<br>Ibadan, Oyo State, Nigeria</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Phone</span>
+                    <span class="font-medium">+234 803 123 4567</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Information -->
+        <div>
+            <h3 class="px-1 text-sm font-semibold text-gray-500 mb-3">ACADEMIC INFORMATION</h3>
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 space-y-5">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Current Class</span>
+                    <span class="font-medium">SS2 Science</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Department</span>
+                    <span class="font-medium">Science</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Enrollment Date</span>
+                    <span class="font-medium">12 September 2024</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Current Term</span>
+                    <span class="font-medium">Term 2 • 2025/2026</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Week</span>
+                    <span class="font-medium">Week 8 of 14</span>
+                </div>
+                
+                <!-- Class Teacher -->
+                <div class="flex justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-700">
+                    <span class="text-gray-500">Class Teacher</span>
+                    <div onclick="openTeacherModal()" class="flex items-center gap-3 cursor-pointer active:scale-95 transition">
+                        <span class="font-medium">Mrs. Adebayo</span>
+                        <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings -->
+        <div>
+            <h3 class="px-1 text-sm font-semibold text-gray-500 mb-3">SETTINGS</h3>
+            
+            <div class="bg-white dark:bg-gray-900 rounded-3xl divide-y divide-gray-100 dark:divide-gray-700">
+                
+                <!-- Biometrics -->
+                <div class="px-6 py-5 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-fingerprint text-2xl text-violet-600"></i>
+                        <div>
+                            <div class="font-medium">Enable Biometrics</div>
+                            <div class="text-xs text-gray-500">Use fingerprint or face ID to login</div>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="biometrics-toggle" 
+                               onclick="toggleBiometrics()" 
+                               class="sr-only peer">
+                        <div class="w-12 h-7 bg-gray-300 dark:bg-gray-600 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-emerald-300 rounded-3xl peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-3xl after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-600"></div>
+                    </label>
+                </div>
+
+                <!-- Change Password -->
+                <div onclick="showChangePasswordModal()" 
+                     class="px-6 py-5 flex items-center justify-between cursor-pointer active:bg-gray-50 dark:active:bg-gray-800">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-lock text-2xl text-amber-600"></i>
+                        <span class="font-medium">Change Password</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                </div>
+
+                <!-- Notification Preferences -->
+                <div onclick="showToast('Notification settings coming soon')" 
+                     class="px-6 py-5 flex items-center justify-between cursor-pointer active:bg-gray-50 dark:active:bg-gray-800">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-bell text-2xl text-sky-600"></i>
+                        <span class="font-medium">Notification Preferences</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                </div>
+
+                <!-- AI Assistant Settings -->
+                <div onclick="showToast('AI Assistant preferences opened')" 
+                     class="px-6 py-5 flex items-center justify-between cursor-pointer active:bg-gray-50 dark:active:bg-gray-800">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-robot text-2xl text-purple-600"></i>
+                        <span class="font-medium">AI Learning Assistant</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <button onclick="logout()" 
+                class="w-full bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 py-5 rounded-3xl font-semibold flex items-center justify-center gap-3 active:scale-95 transition">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout from Eduka</span>
+        </button>
+
+        <div class="text-center text-xs text-gray-400 pt-4">
+            Eduka Student App v2.4.1 • © 2026
+        </div>
+    </div>
+
+    <!-- ==================== TEACHER DETAIL MODAL ==================== -->
+    <div id="teacher-modal" 
+         class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        
+        <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+            <button onclick="closeTeacherModal()" class="text-3xl text-gray-400 hover:text-gray-600">←</button>
+            <h2 class="font-semibold text-2xl">Class Teacher</h2>
+        </div>
+        
+        <div class="flex-1 p-6">
+            <div class="text-center mb-8">
+                <div class="w-28 h-28 mx-auto bg-purple-100 dark:bg-purple-900 rounded-3xl flex items-center justify-center text-7xl mb-4">👩‍🏫</div>
+                <h3 class="text-2xl font-bold">Mrs. Adebayo</h3>
+                <p class="text-emerald-600">Mathematics &amp; Science Teacher</p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-6 space-y-4">
+                <div class="flex justify-between"><span class="text-gray-500">Email</span><span class="font-medium">adeyemi.adebayo@eduka.edu.ng</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">Phone</span><span class="font-medium">+234 809 555 1234</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">Office Hours</span><span class="font-medium">Mon–Fri • 2:00 PM – 4:00 PM</span></div>
+                <div class="pt-4 border-t text-sm text-gray-600 dark:text-gray-300">
+                    "I believe every student can excel in Mathematics with the right guidance and consistent practice."
+                </div>
+            </div>
+            
+            <button onclick="showToast('Message sent to Mrs. Adebayo via Eduka Chat')" 
+                    class="mt-8 w-full py-4 bg-emerald-600 text-white font-semibold rounded-3xl">
+                Message Teacher
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== BIOMETRICS PASSWORD CONFIRMATION MODAL ==================== -->
+    <div id="biometrics-confirm-modal" 
+         class="hidden fixed inset-0 bg-black/60 flex items-end z-[10000]">
+        <div class="bg-white dark:bg-gray-900 w-full rounded-t-3xl p-6 max-h-[70vh]">
+            <h3 class="text-xl font-semibold mb-6 text-center">Confirm Your Password</h3>
+            <p class="text-center text-sm text-gray-500 mb-6">This action requires your password for security</p>
+            
+            <input id="biometrics-password-input" 
+                   type="password" 
+                   placeholder="Enter your password" 
+                   class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-5 outline-none mb-8 text-base">
+            
+            <div class="flex gap-4">
+                <button onclick="cancelBiometricsToggle()" 
+                        class="flex-1 py-4 border border-gray-300 dark:border-gray-600 font-medium rounded-3xl">Cancel</button>
+                <button onclick="confirmBiometricsToggle()" 
+                        class="flex-1 py-4 bg-emerald-600 text-white font-semibold rounded-3xl">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CHANGE PASSWORD MODAL ==================== -->
+    <div id="change-password-modal" 
+         class="hidden fixed inset-0 bg-black/60 flex items-end z-[10000]">
+        <div class="bg-white dark:bg-gray-900 w-full rounded-t-3xl p-6">
+            <h3 class="text-xl font-semibold mb-6">Change Password</h3>
+            
+            <div class="space-y-5">
+                <div>
+                    <label class="text-xs font-medium text-gray-500 mb-2 block">Current Password</label>
+                    <input type="password" id="current-pass" 
+                           class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-gray-500 mb-2 block">New Password</label>
+                    <input type="password" id="new-pass" 
+                           class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-gray-500 mb-2 block">Confirm New Password</label>
+                    <input type="password" id="confirm-pass" 
+                           class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-4 outline-none">
+                </div>
+            </div>
+            
+            <div class="flex gap-4 mt-8">
+                <button onclick="closeChangePasswordModal()" 
+                        class="flex-1 py-4 border border-gray-300 dark:border-gray-600 font-medium rounded-3xl">Cancel</button>
+                <button onclick="saveNewPassword()" 
+                        class="flex-1 py-4 bg-emerald-600 text-white font-semibold rounded-3xl">Update Password</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Biometrics
+        let biometricsEnabled = false;
+        function toggleBiometrics() {
+            const toggleEl = document.getElementById('biometrics-toggle');
+            if (toggleEl.checked && !biometricsEnabled) {
+                // Show password confirmation modal
+                $('#biometrics-confirm-modal').removeClass('hidden').addClass('flex');
+                toggleEl.checked = false; // Reset until confirmed
+            } else if (!toggleEl.checked && biometricsEnabled) {
+                // Disabling also requires confirmation
+                $('#biometrics-confirm-modal').removeClass('hidden').addClass('flex');
+                toggleEl.checked = true;
+            }
+        }
+
+        function confirmBiometricsToggle() {
+            const enteredPass = $('#biometrics-password-input').val();
+            if (enteredPass === "demo1234") { // Demo password from login
+                biometricsEnabled = !biometricsEnabled;
+                document.getElementById('biometrics-toggle').checked = biometricsEnabled;
+                closeBiometricsModal();
+                showToast(biometricsEnabled ? 'Biometrics enabled successfully ✓' : 'Biometrics disabled', false);
+            } else {
+                showToast('Incorrect password. Try again.', true);
+            }
+        }
+
+        function cancelBiometricsToggle() {
+            closeBiometricsModal();
+        }
+
+        function closeBiometricsModal() {
+            $('#biometrics-confirm-modal').addClass('hidden').removeClass('flex');
+            $('#biometrics-password-input').val('');
+        }
+
+        // Change Password Modal
+        function showChangePasswordModal() {
+            $('#change-password-modal').removeClass('hidden').addClass('flex');
+        }
+
+        function closeChangePasswordModal() {
+            $('#change-password-modal').addClass('hidden').removeClass('flex');
+            $('#current-pass, #new-pass, #confirm-pass').val('');
+        }
+
+        function saveNewPassword() {
+            const current = $('#current-pass').val();
+            const newPass = $('#new-pass').val();
+            const confirmPass = $('#confirm-pass').val();
+            
+            if (!current || !newPass || !confirmPass) {
+                showToast('All fields are required', true);
+                return;
+            }
+            if (newPass !== confirmPass) {
+                showToast('New passwords do not match', true);
+                return;
+            }
+            if (current !== "demo1234") {
+                showToast('Current password is incorrect', true);
+                return;
+            }
+            
+            closeChangePasswordModal();
+            showToast('Password updated successfully! 🔐', false);
+        }
+
+        // Teacher Modal
+        function openTeacherModal() {
+            $('#teacher-modal').removeClass('hidden').addClass('flex');
+        }
+
+        function closeTeacherModal() {
+            $('#teacher-modal').addClass('hidden').removeClass('flex');
+        }
+
+        // Edit Profile (demo)
+        function editProfile() {
+            showToast('Profile editor would open here (demo)', false);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.hash = '#login-page';
+                $('#main-app').addClass('hidden');
+                showToast('Logged out successfully', false);
+            }
+        }
+
+        // Initialize Profile Page
+        $(document).ready(function() {
+            console.log('%c👤 Profile Page Loaded Successfully', 'color:#10b981; font-weight:600');
+        });
+
+        // Global functions
+        window.toggleDarkMode = toggleDarkMode;
+        window.showToast = showToast;
+        window.openTeacherModal = openTeacherModal;
+        window.closeTeacherModal = closeTeacherModal;
+        window.toggleBiometrics = toggleBiometrics;
+        window.confirmBiometricsToggle = confirmBiometricsToggle;
+        window.cancelBiometricsToggle = cancelBiometricsToggle;
+        window.closeBiometricsModal = closeBiometricsModal;
+        window.showChangePasswordModal = showChangePasswordModal;
+        window.closeChangePasswordModal = closeChangePasswordModal;
+        window.saveNewPassword = saveNewPassword;
+        window.editProfile = editProfile;
+        window.logout = logout;
+    </script>
+</section>

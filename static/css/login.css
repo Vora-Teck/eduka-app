@@ -1,0 +1,311 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+  --primary-color: #0051A0;
+  --secondary-color: #858034;
+  --color-green: green;
+  --form-max-width: 600px;
+}
+body {
+  background: #fff;
+  font-family:Arial, Helvetica, sans-serif;
+}
+/* custom scroll bar */
+::-webkit-scrollbar {width: 0px !important;}
+::-webkit-scrollbar-track {background: #242526;}
+::-webkit-scrollbar-thumb {background: #3A3B3C;}
+
+.page-load {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  z-index: 200000;
+}
+.page-load.active {
+  display: flex
+}
+/*
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader::before,
+.loader::after {    
+  content:"";
+  grid-area: 1/1;
+  --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 12px 12px;
+  animation: l12 1s infinite;
+}
+.loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 8px 8px;
+  animation-timing-function: linear
+}
+  */
+.loader-con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 3px;
+  background: 
+    radial-gradient(farthest-side,#ffa516 95%,#0000) 50% 0/12px 12px no-repeat,
+    radial-gradient(farthest-side,#0000 calc(100% - 5px),#ffa516 calc(100% - 4px)) content-box;
+  animation: l6 2s infinite ;
+}
+@keyframes l6 {to{transform: rotate(1turn)}}
+
+#loader-text {
+  color: #000;
+}
+
+
+
+.view {
+  display: none;
+}
+
+.carou, .login-page {
+  height: 100vh;
+  position: relative;
+  padding: 20px;
+  overflow-y: auto;
+}
+@media screen and (max-width: 767px) {
+  .carou, .login-page {
+    height: fit-content;
+  }
+}
+
+
+
+.reg-btn {
+  color: var(--primary-color);
+  background: #fff;
+  padding: 10px;
+  width: 150px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+
+/* Style the dots */
+header {
+  margin-top: 20px;
+}
+header > img {
+  height: 40px;
+  width: auto;
+}
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  color: var(--primary-color);
+}
+.sch {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.sch .sch-img {
+  height: 60px;
+  width: auto;
+}
+.user-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #eee;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.user-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+
+
+.login-form, .signup-form {
+  padding: 20px;
+}
+.login-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.input-con {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  font-weight: 400;
+  margin-bottom: 10px
+}
+label[for="terms"] {
+  display: inline-block;
+}
+input:not([type="checkbox"]), select, textarea {
+  display: block;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  background: #eee;
+}
+input:not([type="submit"]):focus,
+textarea:focus, select:focus {
+  border: 1px solid var(--primary-color);
+  background: #fff;
+}
+input[type=submit] {
+  background: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+}
+input[type=submit]:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.custom-control-label {
+  font-weight: normal !important;
+}
+
+
+.lang-select{
+  width: fit-content;
+  margin-left: auto;
+
+}
+#setupForm {
+  background: #fff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.form-group {
+  display: flex;
+  gap: 7%;
+}
+.form-group > div {
+  width: 100%;
+}
+
+.cus-form-control{
+  margin-bottom: 25px !important;
+}
+
+input.error, select.error, textarea.error{
+  outline: .5px solid red;
+}
+
+span#error,
+span[id$="-error"] {
+  font-size: x-small;
+  color: red;
+  margin-top: 2px;
+}
+
+
+.autocomplete {
+  position: relative;
+  width: 100%;
+}
+
+
+
+.suggestions {
+  position: relative;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 180px;
+  overflow-y: auto;
+  border-radius: 0 0 6px 6px;
+  z-index: 1000;
+  display: none;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: #f0f0f0;
+}
+.suggestion-item img {
+  width: 30px;
+  height: 30px;
+}
+
+
+i.rotate {
+  animation: rotate 1s linear infinite;
+}
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(359deg);}
+}
+
+.bio-login {
+  color: #000;
+  margin-bottom: 20px;
+  margin-top: 30px !important;
+  text-align: center;
+}
+.bio-login i {
+  font-size: 40px;
+  color: #000;
+}
+
+
+.n_error {background:red;color:#fff}
+.n_success {background:green;color:#fff}
+.n_warning {background:rgb(189, 189, 2);color:#000}
+.n_info {background:blue;color:#fff}
+.n_network {background:orange;color:#000}

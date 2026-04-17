@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <link rel="apple-touch-icon" href="/static/logos/logo.png" />
+      <link rel="shortcut icon" href="/static/logos/logo.png" />
+      <title>Eduka LMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/rigan.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/sweetalert.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/dist/semantic.min.css">
+    <link rel="stylesheet" href="/static/css/toastify.min.css">
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Javascript -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/sweetalert.min.js"></script>
+    <script src="/static/js/owl.carousel.min.js"></script>
+    <script src="/static/js/toastify.min.js"></script>
+    <script src="/dist/semantic.min.js"></script>
+    
+    <script src="/tinymce/tinymce.min.js"></script>
+    <script src="/static/module/swif.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.0/dist/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      var on = XJSX.event.on,
+      emit = XJSX.event.emit;
+      emit("hashchange");
+    </script>
+
+    <template id="sidenav">
+      <aside class="dashboard-sidebar" id="dashboardSidebar">
+        <div class="dashboard-brand">
+          <button class="dashboard-sidebar-toggle">
+            <span class="material-symbols-rounded">menu</span>
+          </button>
+          <a class="logo" href="#">
+            <img src="/static/logos/Logo (1).svg" alt="" style="height:30px;width:auto;">
+          </a>
+        </div>
+
+        <nav class="dashboard-nav">
+          <div class="dashboard-nav-section">
+
+            <a href="#" class="dashboard-nav-item dash-act">
+              <span class="nav-icon material-symbols-rounded">dashboard</span>
+              <span class="nav-label">Overview</span>
+            </a>
+
+            <a href="#subjects" class="dashboard-nav-item sub-act">
+              <span class="nav-icon material-symbols-rounded">school</span>
+              <span class="nav-label">Subjects</span>
+            </a>
+
+            <a href="#assignment" class="dashboard-nav-item">
+              <span class="nav-icon material-symbols-rounded">assignment_add</span>
+              <span class="nav-label">Assignments</span>
+            </a>
+
+            <a href="#analytics" class="dashboard-nav-item">
+              <span class="nav-icon material-symbols-rounded">calendar_month</span>
+              <span class="nav-label">Calendar</span>
+            </a>
+
+            <a href="#subscriptions" class="dashboard-nav-item">
+              <span class="nav-icon material-symbols-rounded">assignment</span>
+              <span class="nav-label">Results</span>
+            </a>
+
+            <a href="#notifications" class="dashboard-nav-item">
+              <span class="nav-icon material-symbols-rounded">notifications</span>
+              <span class="nav-label">Notifications</span>
+            </a>
+
+            <a href="#messages" class="dashboard-nav-item">
+              <span class="nav-icon material-symbols-rounded">chat</span>
+              <span class="nav-label">Messages</span>
+            </a>
+
+            <a href="#settings" class="dashboard-nav-item">
+              <span class="nav-icon material-symbols-rounded">settings</span>
+              <span class="nav-label">Settings</span>
+            </a>
+
+            <a href="#" class="logout-btn dashboard-nav-item">
+              <span class="nav-icon material-symbols-rounded">logout</span>
+              <span class="nav-label">Logout</span>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Back to Site Button -->
+        <div class="sidebar-footer">
+          <a href="#" class="btn btn-secondary sidebar-back-button">
+            <span class="material-symbols-rounded">home</span>
+            <span class="btn-label">Back to Site</span>
+          </a>
+        </div>
+      </aside>
+
+      <div class="dashboard-sidebar-overlay" id="dashboardSidebarOverlay"></div>
+
+      <div class="bottom-nav">
+        <ul class="nav-content">
+
+          <li class="nav-list">
+              <a href="#" class="link-item active">
+                <span class="link-icon material-symbols-rounded">dashboard</span>
+                  <span class="link-text">Home</span>
+              </a>
+          </li>
+          <li class="nav-list">
+              <a href="#subjects" class="link-item">
+                <span class="link-icon material-symbols-rounded">school</span>
+                  <span class="link-text">Subjects</span>
+              </a>
+          </li>
+          <li class="nav-list">
+              <a href="#" class="link-item">
+                <span class="link-icon material-symbols-rounded">assignment</span>
+                  <span class="link-text">Assignment</span>
+              </a>
+          </li>
+          <li class="nav-list">
+              <a href="#" class="link-item">
+                <span class="link-icon material-symbols-rounded">account_circle</span>
+                  <span class="link-text">Profile</span>
+              </a>
+          </li>
+          
+
+          <span class="indicator"></span>
+        </ul>
+      </div>
+
+    </template>
+
+
+    <template id="dashboard">
+
+      <div class="dashboard-container">
+        <?use-template: "sidenav"?>
+
+        <!-- Dashboard Main Content -->
+        <main class="dashboard-main">
+          <!-- Dashboard Header -->
+          <header class="dashboard-header">
+            <!-- Header Content -->
+            <div class="dashboard-header-content">
+              <div class="dashboard-header-title">
+                
+              </div>
+            </div>
+            <!-- Header Actions -->
+            <div class="dashboard-header-actions">
+              <!-- Mobile Search Button -->
+              
+
+              <!-- Notification Button -->
+              <div class="notification-button">
+                <span class="fa fa-bell-o h2"></span>
+                <div class="notification-badge">3</div>
+              </div>
+
+              <!-- User Profile -->
+              <div class="user-menu" id="userMenu">
+                <div class="user-menu-trigger" id="user-menu-trigger">
+                  <div class="user-avatar-small">
+                    <img id="user-avatar" src="/static/image/avatar.png" alt="User Avatar" />
+                  </div>
+                </div>
+                <div class="user-menu-dropdown">
+                  <a href="#profile" class="user-menu-item">
+                    <span class="icon fa fa-user"></span>
+                    <span>Profile</span>
+                  </a>
+                  <!-- Theme Toggle inside dropdown -->
+                  <div class="user-menu-item theme-item">
+                    <span class="icon fa fa-paint-brush"></span>
+                    <div class="theme-toggle" id="theme-toggle">
+                      <div class="theme-option active" data-theme="light">Light</div>
+                      <div class="theme-option" data-theme="dark">Dark</div>
+                    </div>
+                  </div>
+                  <a href="#" class="logout-btn user-menu-item">
+                    <span class="icon fa fa-power-off"></span>
+                    <span>Sign Out</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </header>
+  
+          <!-- Dashboard Content -->
+          <div class="dashboard-content">
+            <!-- Overview View -->
+            <div class="dashboard-view active" id="overview" style="padding-bottom:25px;">
+              
+              <div class="search-container" id="searchContainer">
+                <i class="search-icon fa fa-search"></i>
+                <input type="search" class="search-input form-input" placeholder="Search..." id="searchInput" />
+                
+              </div>
+
+              <h3>Academics</h3>
+              <!-- Stats Cards -->
+              <div class="stats-grid dash-grid">
+
+                <div class="stat-card" data-id="syllabus">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/books.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Subjects</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="timetable">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/timetable.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Timetable</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/assignment.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Assignments</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="profile">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon">
+                      <img src="/static/icons/student.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">My Profile</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon">
+                      <img src="/static/icons/teacher.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Teachers</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/attendance.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Attendance</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/exam.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Exams</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/result.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Results</div>
+                  </div>
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/fees.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Fees</div>
+                  </div>
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/event.svg" alt="">
+                    </div>
+                    <div class="stat-card-title">Events</div>
+                  </div>
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon primary">
+                      <img src="/static/icons/megaphone.png" alt="">
+                    </div>
+                    <div class="stat-card-title">News</div>
+                  </div>
+                </div>
+
+                
+
+              </div>
+
+              <h3>Tools</h3>
+
+              <div class="stats-grid dash-grid">
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon">
+                      <img src="/static/icons/dictionary.png" alt="">
+                    </div>
+                    <div class="stat-card-title">Dictionary</div>
+                  </div>
+                  
+                </div>
+
+                <div class="stat-card" data-id="">
+                  <div class="stat-card-header">
+                    <div class="stat-card-icon">
+                      <img src="/static/icons/exchange.png" alt="">
+                    </div>
+                    <div class="stat-card-title">Converters</div>
+                  </div>
+                </div>
+
+                <div class="stat-card" data-id="">
+                    <div class="stat-card-header">
+                      <div class="stat-card-icon">
+                        <img src="/static/icons/formula.png" alt="">
+                      </div>
+                      <div class="stat-card-title">Formulas</div>
+                    </div>
+                </div>
+
+              </div>
+
+              
+            </div>
+          </div>
+        </main>
+
+        <elevenlabs-convai 
+          id="elevenlabs_ai"
+          agent-id="agent_9901kdrbv6eyet1s6y21hf0334mt" 
+          override-first-message="Hi {{user_name}}, i'm here to help you stay on top of your studies. What can i do for you today?"
+         
+      ></elevenlabs-convai>
+      </div>
+
+      <script src="/static/js/script.js"></script>
+      <script type="module" src="/static/js/dashboard.js"></script>
+      <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+     <script>
+
+        $(".stat-card").click(function() {
+          let loc = $(this).data('id');
+          if(loc) {
+            location.href = `#${loc}`
+          }
+        })
+      </script>
+
+    </template>
+
+    
+    <template id="eduka_ai">
+      <div class="dashboard-container">
+        <?use-template: "sidenav"?>
+
+        <div class="side-menu convo-menu">
+          <div class="side-area">
+            <div class="close-menu">X</div>
+            <div class="h3 w-padding">
+              Conversations&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary new-convo-btn"><i class="fa fa-plus"></i> New</button>
+            </div>
+            <hr>
+            <ul class="convo-list">
+            </ul>
+          </div>
+        </div>
+        
+        <main class="dashboard-main">
+
+          <header class="dashboard-header">
+            <div class="dashboard-header-content">
+              <button class="dashboard-sidebar-toggle">
+                <span class="fa fa-chevron-left"></span>
+              </button>
+              <div class="dashboard-header-title">
+                Eduka AI
+              </div>
+            </div>
+            
+            <div class="dashboard-header-actions">
+              
+              
+              <div class="convo-menu-button">
+                <span class="fa fa-navicon"></span>
+              </div>
+
+              
+              <div class="user-menu" id="userMenu">
+                <div class="user-menu-trigger" id="user-menu-trigger">
+                  <span class="fa fa-ellipsis-v"></span>
+                </div>
+                <div class="user-menu-dropdown">
+                  <a href="#" class="user-menu-item clear-chat">
+                    <span class="icon fa fa-trash"></span>
+                    <span>Clear chat</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div class="dashboard-content">
+            <div class="dashboard-view active">
+            
+              <div class="chatbot-popup">
+                
+                <div class="chat-body" data-id="">
+
+
+                </div>
+        
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="chat-footer">
+            <form action="#" class="chat-form">
+              <textarea placeholder="Message..." class="message-input" required></textarea>
+              <div class="chat-controls">
+                <button type="button" id="emoji-picker" class="fa fa-smile-o"></button>
+                <div class="file-upload-wrapper">
+                  <input type="file" accept="image/*" id="file-input" hidden />
+                  <img src="#" />
+                  <button type="button" id="file-upload" class="fa fa-paperclip"></button>
+                  <button type="button" id="file-cancel" class="fa fa-times"></button>
+                </div>
+                <button type="submit" id="send-message" class="fa fa-send"></button>
+              </div>
+            </form>
+          </div>
+
+        </main>
+      </div>
+
+
+
+      
+    
+      <script src="/static/js/script.js"></script>
+      <script type="module" src="/static/js/ai.js"></script>
+      
+      <script>
+        $(".close-menu").click(function() {
+          $(this).parent(".side-area").parent(".side-menu").removeClass("active")
+        })
+      </script>
+    </template>
+
+  
+
+
+
+    <template id="profile">
+
+      <div class="modal-con small-con biometric-con">
+        <div class="modal-body">
+          <!--
+          <div class="close-modal">X</div>
+          
+          <div class="modal-header">
+            <div class="h5 w-bold-x">Add New Class</div>
+          </div>
+          -->
+          <form class="mt-3 confirm-pass-form">
+    
+              <div class="form-group">
+                <label for="st-lname">Enter your Password</label>
+                <input type="password" id="password" class="form-control">
+              </div>
+    
+            
+            
+            <div class="w-flex w-flex-end w-align-center" style="gap:20px;">
+              <button class="btn btn-primary w-red canc-btn">Cancel</button>
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="dashboard-container">
+
+        <?use-template: "sidenav"?>
+        <!-- Dashboard Main Content -->
+        <main class="dashboard-main">
+
+          <header class="dashboard-header">
+            <!-- Header Content -->
+            <div class="dashboard-header-content">
+              <button class="dashboard-sidebar-toggle">
+                <span class="fa fa-chevron-left"></span>
+              </button>
+            </div>
+            <div class="dashboard-header-title">
+              My Profile
+            </div>
+            <!-- Header Actions -->
+            <div class="dashboard-header-actions">
+              <!-- User Profile
+              <a href="#notifications">
+              <span class="fa fa-bell h4"></span>
+
+              </a>
+              
+              <div class="user-menu" id="userMenu">
+                <div class="user-menu-trigger" id="user-menu-trigger">
+                  <span class="fa fa-ellipsis-v"></span>
+                </div>
+                <div class="user-menu-dropdown">
+                  <a href="#" class="user-menu-item">
+                    <span class="icon fa fa-trash"></span>
+                    <span>Clear chat</span>
+                  </a>
+                </div>
+              </div>
+               -->
+            </div>
+          </header>
+
+          <div class="dashboard-content">
+            <div class="dashboard-view active" id="settings">
+
+              <div class="user-bio-con">
+                <div class="">
+                  <img src="" class="user_img" alt="" />
+                </div>
+                <div class="">
+                  <div class="h5 user-names mb-2"></div>
+                  <div class="h6 mt-2 text-muted">Class: <span class="user-class"></span> | Gender: <span class="user-gen"></span></div>
+                </div>
+              </div>
+
+              <div class="user-reg-con row">
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">Admission Number</div>
+                  <div class="h6 user-id"></div>
+                </div>
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">Registration Date</div>
+                  <div class="h6 user-reg"></div>
+                </div>
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">Department</div>
+                  <div class="h6 user-dep"></div>
+                </div>
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">Class Teacher</div>
+                  <div class="h6 user-teach"></div>
+                </div>
+              </div>
+              
+                <div class="user-detail-con">
+                  
+
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#home">Information</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#menu1">Classmates</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#menu2">Settings</a>
+                    </li>
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+
+                    <div class="tab-pane active container" id="home">
+                      
+                      <div class="user-info-con row">
+                        <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                          <div class="h6 text-muted">Date of Birth</div>
+                          <div class="h6 user-dob"></div>
+                        </div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                          <div class="h6 text-muted">Parent's Name</div>
+                          <div class="h6 user-pname"></div>
+                        </div>
+                      </div>
+
+                      <div class="user-info-con row">
+                        <div class="col-12 col-xs-12 col-sm-6 col-lg-4">
+                          <div class="h6 text-muted">Parent's Email</div>
+                          <div class="h6 user-pemail"></div>
+                        </div>
+                      </div>
+
+                      <div class="user-info-con row">
+                        <div class="col-12 col-xs-12 col-sm-6 col-lg-4">
+                          <div class="h6 text-muted">Parents' Phone Number</div>
+                          <div class="h6 user-ptel"></div>
+                        </div>
+                      </div>
+
+                      <div class="user-info-con row">
+                        <div class="col-12 col-xs-12 col-sm-6 col-lg-4">
+                          <div class="h6 text-muted">Address</div>
+                          <div class="h6 user-addr"></div>
+                        </div>
+                      </div>
+                      
+                    </div>
+
+                    <div class="tab-pane container" id="menu1">
+                      <div class="classmate-con"></div>
+                    </div>
+
+                    <div class="tab-pane container" id="menu2">
+                      <div class="profile-section">
+                        
+                        <div class="profile-item">
+                          <div class="w-bold-x"><i class="fa fa-solid fa-fingerprint"></i> Fingerprint Login</div>
+                          <form class="toggle-btn">
+                            <input type="checkbox" id="checkbox1" class="toggle-input" />
+                            <label for="checkbox1" class="toggle-label">Toggle</label>
+                          </form>
+                        </div>
+
+                        <div class="profile-item change-pass-btn">
+                          <div class="w-bold-x"><i class="fa fa-key"></i> Change Password</div>
+                          <div id=""><i class="fa fa-chevron-right"></i></div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+        
+              <div class="change_pass_con side-con">
+                <div class="mb-2">
+                  <div class="w-flex w-flex-start w-align-center" style="gap:20px;padding:20px 20px 0px 20px;">
+                    <div class="c_back_btn"><i class="fa fa-chevron-left"></i></div>
+                    <div class="h5">Change Password</div>
+                  </div>
+                  <form id="change-pass-form" class="w-padding mt-3">
+                    <div class="form-group">
+                      <label for="">Old Password</label>
+                      <input type="password" class="form-control" id="old-pass" />
+                    </div>
+                    <div class="form-group">
+                      <label for="">New Password</label>
+                      <input type="password" class="form-control" id="new-pass" />
+                    </div>
+                    <div class="form-group">
+                      <label for="">Confirm New Password</label>
+                      <input type="password" class="form-control" id="cnew-pass" />
+                    </div>
+                    <button class="mt-3 btn btn-primary w-block" type="submit">Update Password</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Settings View -->
+          
+        </main>
+      </div>
+
+      <script src="/static/js/script.js"></script>
+      <script type="module" src="/static/js/profile.js"></script>
+      <script>
+        $(".test-act").addClass('active')
+
+        $(".close-modal").click(function() {
+          $(this).parent('.modal-body').parent('.modal-con').removeClass('active')
+        })
+
+        $(".canc-btn").click(function(e) {
+        e.preventDefault();
+        $(".biometric-con").removeClass('active')
+    })
+
+        $('.change-pass-btn').click(function() {
+          $(".change_pass_con").addClass('active')
+        })
+        $('.c_back_btn').click(function() {
+          $(this).parent('div').parent('div').parent('.side-con').removeClass('active')
+        });
+        
+        
+      </script>
+    </template>
+
+
+    <template id="timetable">
+
+
+      <div class="dashboard-container">
+
+        <?use-template: "sidenav"?>
+        <!-- Dashboard Main Content -->
+        <main class="dashboard-main">
+
+          <header class="dashboard-header">
+            <!-- Header Content -->
+            <div class="dashboard-header-content">
+              <button class="dashboard-sidebar-toggle">
+                <span class="fa fa-chevron-left"></span>
+              </button>
+            </div>
+            <div class="dashboard-header-title">
+              My Timetable
+            </div>
+            <!-- Header Actions -->
+            <div class="dashboard-header-actions">
+              
+            </div>
+          </header>
+
+          <div class="dashboard-content">
+            <div class="dashboard-view active" id="settings">
+
+              <div class="user-reg-con row">
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">Current Term</div>
+                  <div class="h6 curr-t"></div>
+                </div>
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">Term Ends</div>
+                  <div class="h6 t-end"></div>
+                </div>
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">No of Weeks</div>
+                  <div class="h6 t-weeks"></div>
+                </div>
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                  <div class="h6 text-muted">Current Week</div>
+                  <div class="h6 curr-week"></div>
+                </div>
+              </div>
+              
+                <div class="user-detail-con">
+                  
+
+                  <ul class="nav nav-tabs timet">
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#home">Mon</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#menu1">Tue</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#menu2">Wed</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#menu3">Thu</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#menu4">Fri</a>
+                    </li>
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+
+                    <div class="tab-pane active container" id="home">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Time</th>
+                              <th>Subject</th>
+                            </tr>
+                          </thead>
+                          <tbody class="time-row mon-row">
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane container" id="menu1">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Time</th>
+                              <th>Subject</th>
+                            </tr>
+                          </thead>
+                          <tbody class="time-row tue-row">
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane container" id="menu2">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Time</th>
+                              <th>Subject</th>
+                            </tr>
+                          </thead>
+                          <tbody class="time-row wed-row">
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane container" id="menu3">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Time</th>
+                              <th>Subject</th>
+                            </tr>
+                          </thead>
+                          <tbody class="time-row thu-row">
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane container" id="menu4">
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Time</th>
+                              <th>Subject</th>
+                            </tr>
+                          </thead>
+                          <tbody class="time-row fri-row">
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+        
+
+            </div>
+          </div>
+          <!-- Settings View -->
+          
+        </main>
+      </div>
+
+      <script src="/static/js/script.js"></script>
+      <script type="module" src="/static/js/timetable.js"></script>
+      <script>
+        $(".test-act").addClass('active')
+
+        $(".close-modal").click(function() {
+          $(this).parent('.modal-body').parent('.modal-con').removeClass('active')
+        })
+
+        
+        $('.c_back_btn').click(function() {
+          $(this).parent('div').parent('div').parent('.side-con').removeClass('active')
+        });
+        
+        
+      </script>
+    </template>
+
+
+    <template id="syllabus">
+
+      <div class="dashboard-container">
+
+        <?use-template: "sidenav"?>
+        <!-- Dashboard Main Content -->
+        <main class="dashboard-main">
+
+          <header class="dashboard-header">
+            <!-- Header Content -->
+            <div class="dashboard-header-content">
+              <button class="dashboard-sidebar-toggle">
+                <span class="fa fa-chevron-left"></span>
+              </button>
+            </div>
+            <div class="dashboard-header-title">
+              My Subjects
+            </div>
+            <!-- Header Actions -->
+            <div class="dashboard-header-actions">
+              
+            </div>
+          </header>
+
+          <div class="dashboard-content">
+            <div class="dashboard-view active" id="settings">
+
+              <div class="stats-grid sub-row">
+
+              </div>
+              
+            </div>
+          </div>
+          <!-- Settings View -->
+          
+        </main>
+
+        <div class="topics-con side-con">
+          <div class="mb-2">
+            <div class="w-flex w-flex-start w-align-center" style="gap:20px;padding:20px 20px 0px 20px;">
+              <div class="c_back_btn"><i class="fa fa-chevron-left"></i></div>
+              <div class="h5 syl_name"></div>
+            </div>
+
+            <div class="dashboard-content">
+              <div class="dashboard-view active" id="settings">
+
+                <div class="user-reg-con row">
+                  <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                    <div class="h6 text-muted">No of Topics</div>
+                    <div class="h6 s-topics"></div>
+                  </div>
+                  <div class="col-6 col-xs-6 col-sm-6 col-lg-4">
+                    <div class="h6 text-muted">Teacher</div>
+                    <div class="h6 s-staff"></div>
+                  </div>
+                </div>
+                <div class="topics-container"></div>
+
+              </div>
+            </div>
+
+            
+            
+          </div>
+        </div>
+
+      </div>
+
+      <script src="/static/js/script.js"></script>
+      <script type="module" src="/static/js/subject.js"></script>
+      <script>
+        $(".test-act").addClass('active')
+
+        $(".close-modal").click(function() {
+          $(this).parent('.modal-body').parent('.modal-con').removeClass('active')
+        })
+
+        
+        $('.c_back_btn').click(function() {
+          $(this).parent('div').parent('div').parent('.side-con').removeClass('active')
+        });
+        
+        
+      </script>
+    </template>
+
+
+    <template id="sample">
+      <div class="dashboard-container">
+        <?use-template: "sidenav"?>
+        <!-- Dashboard Main Content -->
+        <main class="dashboard-main">
+          <?use-template: "header"?>
+          <div class="dashboard-content">
+            <div class="dashboard-view" id="settings">
+            
+            </div>
+          </div>
+          <!-- Settings View -->
+          
+        </main>
+      </div>
+
+      <script src="/static/js/script.js"></script>
+      <script src="/static/js/sample.js"></script>
+      <script>
+        $("#dashboardTitle").html(`Sample`)
+        $(".test-act").addClass('active')
+      </script>
+    </template>
+
+    <template id="404">
+      <div class="dashboard-container">
+        <?use-template: "sidenav"?>
+        <!-- Dashboard Main Content -->
+        <main class="dashboard-main">
+          <?use-template: "header"?>
+          <!-- Projects View -->
+          <div class="dashboard-view" id="projects">
+            <div class="empty-state">
+              <div class="empty-state-icon">
+                <span class="material-symbols-rounded">warning</span>
+              </div>
+              <h3 class="empty-state-title">Error 404: Page Not Found</h3>
+              <p class="empty-state-description">This page is unavailable at the moment. Go back to <a href="/#">Home</a></p>
+            </div>
+          </div>
+        </main>
+      </div>
+        
+    </template>
+
+    <!-- Routes -->
+    <template route="/">
+      <?use-template: "dashboard"?>
+    </template>
+
+    <template route="/profile">
+      <?use-template: "profile"?>
+    </template>
+
+    <template route="/timetable">
+      <?use-template: "timetable"?>
+    </template>
+
+    <template route="/syllabus">
+      <?use-template: "syllabus"?>
+    </template>
+
+    <template route="/ai">
+      <?use-template: "eduka_ai"?>
+    </template>
+
+
+  </head>
+  <body>
+    <div class="page-load">
+      <div class="loader-con w-card">
+          <div class="loader"></div>
+          <div id="loader-text"></div>
+      </div>
+    </div>
+
+    <div class="net-alert alert alert-warning alert-dismissible fade">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong><i class="fa fa-warning"></i> Oops!</strong> You are currently offline
+    </div>
+
+    <script src="/static/js/functions.js"></script>
+    <?on: "hashchange"?>
+        <script>
+            var webVersion = navigator.userAgent;
+            if(/Chrome\/5[0-9]/.test(webVersion)) {
+              pushNotification("n_warning", "Your device version is outdated and cannot run this app.", -1)
+            }
+        </script>
+        <?eval:
+        "var hash=location.hash
+        hash=hash.replace(/^\/?#\/?|^/img,'/')
+        var page=document.querySelector(`template[route='${hash}']`)||'404';"?>
+        <?use-template: page?>
+      <?end?>
+    <!-- Scripts -->
+    
+  </body>
+</html>

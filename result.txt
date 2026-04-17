@@ -1,0 +1,211 @@
+<!-- ==================== RESULTS PAGE ==================== -->
+<section id="results-page" class="section hidden bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+
+    <!-- Header -->
+    <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+        <h1 class="text-3xl font-bold tracking-tight">My Results</h1>
+        <div onclick="toggleDarkMode()" 
+             class="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center cursor-pointer active:scale-95 transition">
+            <i id="results-theme-icon" class="fa-solid fa-moon text-lg"></i>
+        </div>
+    </div>
+
+    <div class="px-6 pt-6 space-y-8">
+
+        <!-- Term Filter -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-2 flex">
+            <button onclick="switchTerm(1)" id="term-btn-1"
+                    class="flex-1 py-4 text-sm font-semibold rounded-3xl transition-all">Term 1</button>
+            <button onclick="switchTerm(2)" id="term-btn-2"
+                    class="flex-1 py-4 text-sm font-semibold rounded-3xl bg-emerald-600 text-white transition-all">Term 2</button>
+            <button onclick="switchTerm(3)" id="term-btn-3"
+                    class="flex-1 py-4 text-sm font-semibold rounded-3xl transition-all">Term 3</button>
+        </div>
+
+        <!-- Report Card -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm">
+
+            <!-- Report Card Header -->
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="text-xs opacity-75">EDUKA STUDENT REPORT CARD</div>
+                        <div id="student-name" class="text-2xl font-bold">Hassan Olamide Adeyemi</div>
+                        <div id="student-class" class="text-sm opacity-90">SS2 Science • STU-20241234</div>
+                    </div>
+                    <div class="text-right">
+                        <div id="report-term" class="text-lg font-semibold">Term 2 • 2025/2026</div>
+                        <div class="text-xs opacity-75">16 April 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Table -->
+            <div class="p-6">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200 dark:border-gray-700">
+                            <th class="text-left py-4 text-xs font-medium text-gray-500">SUBJECT</th>
+                            <th class="text-center py-4 text-xs font-medium text-gray-500">CA1</th>
+                            <th class="text-center py-4 text-xs font-medium text-gray-500">CA2</th>
+                            <th class="text-center py-4 text-xs font-medium text-gray-500">EXAM</th>
+                            <th class="text-center py-4 text-xs font-medium text-gray-500">TOTAL</th>
+                            <th class="text-center py-4 text-xs font-medium text-gray-500">GRADE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-table-body" class="text-sm">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Summary Footer -->
+            <div class="border-t border-gray-100 dark:border-gray-700 px-6 py-5 flex justify-between items-center bg-gray-50 dark:bg-gray-800">
+                <div>
+                    <div class="text-xs text-gray-500">OVERALL PERFORMANCE</div>
+                    <div id="overall-percentage" class="text-4xl font-bold text-emerald-600">84%</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-xs text-gray-500">CLASS POSITION</div>
+                    <div class="font-semibold">5th out of 32</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 gap-4">
+            <button onclick="downloadReportCard()" 
+                    class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-emerald-600 py-5 rounded-3xl font-semibold flex items-center justify-center gap-3 active:scale-95 transition">
+                <i class="fa-solid fa-download"></i>
+                <span>Download Report Card</span>
+            </button>
+            
+            <button onclick="shareReportCard()" 
+                    class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-emerald-600 py-5 rounded-3xl font-semibold flex items-center justify-center gap-3 active:scale-95 transition">
+                <i class="fa-solid fa-share-nodes"></i>
+                <span>Share Result</span>
+            </button>
+        </div>
+
+        <!-- Remarks -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-6">
+            <h3 class="text-sm font-medium text-gray-500 mb-3">TEACHER'S REMARK</h3>
+            <p id="teacher-remark" class="italic text-gray-700 dark:text-gray-300 leading-relaxed">
+                Hassan continues to show strong potential in Science subjects. He needs to improve consistency in Mathematics and submit assignments on time. Overall performance is good.
+            </p>
+            <div class="mt-6 text-right text-xs text-gray-500">
+                — Mrs. Adebayo (Class Teacher)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo Results Data
+        const resultsData = {
+            term1: {
+                term: "Term 1",
+                overall: 78,
+                position: "12th out of 32",
+                remark: "Good effort shown. Keep improving in English Literature and Biology.",
+                subjects: [
+                    { name: "Mathematics", ca1: 18, ca2: 22, exam: 65, total: 105, grade: "B" },
+                    { name: "English Literature", ca1: 15, ca2: 19, exam: 58, total: 92, grade: "C" },
+                    { name: "Biology", ca1: 22, ca2: 20, exam: 70, total: 112, grade: "A" },
+                    { name: "Physics", ca1: 17, ca2: 21, exam: 62, total: 100, grade: "B" },
+                    { name: "Chemistry", ca1: 19, ca2: 18, exam: 68, total: 105, grade: "B" }
+                ]
+            },
+            term2: {
+                term: "Term 2",
+                overall: 84,
+                position: "5th out of 32",
+                remark: "Hassan continues to show strong potential in Science subjects. He needs to improve consistency in Mathematics and submit assignments on time. Overall performance is good.",
+                subjects: [
+                    { name: "Mathematics", ca1: 20, ca2: 24, exam: 72, total: 116, grade: "A" },
+                    { name: "English Literature", ca1: 16, ca2: 21, exam: 65, total: 102, grade: "B" },
+                    { name: "Biology", ca1: 23, ca2: 22, exam: 78, total: 123, grade: "A" },
+                    { name: "Physics", ca1: 19, ca2: 23, exam: 70, total: 112, grade: "A" },
+                    { name: "Chemistry", ca1: 21, ca2: 20, exam: 74, total: 115, grade: "A" }
+                ]
+            },
+            term3: {
+                term: "Term 3",
+                overall: 81,
+                position: "8th out of 32",
+                remark: "Excellent improvement this term. Keep up the good work!",
+                subjects: [
+                    { name: "Mathematics", ca1: 19, ca2: 23, exam: 68, total: 110, grade: "A" },
+                    { name: "English Literature", ca1: 18, ca2: 20, exam: 62, total: 100, grade: "B" },
+                    { name: "Biology", ca1: 22, ca2: 21, exam: 75, total: 118, grade: "A" }
+                ]
+            }
+        };
+
+        let currentTerm = 2;
+
+        // Render Results Table
+        function renderResults(term) {
+            const data = resultsData[`term${term}`];
+            
+            \( ('#report-term').text(` \){data.term} • 2025/2026`);
+            \( ('#overall-percentage').text(` \){data.overall}%`);
+            $('#teacher-remark').text(data.remark);
+
+            let tableHTML = '';
+            data.subjects.forEach(sub => {
+                tableHTML += `
+                <tr class="border-b border-gray-100 dark:border-gray-700 last:border-none">
+                    <td class="py-5 font-medium">${sub.name}</td>
+                    <td class="text-center py-5">${sub.ca1}</td>
+                    <td class="text-center py-5">${sub.ca2}</td>
+                    <td class="text-center py-5">${sub.exam}</td>
+                    <td class="text-center py-5 font-semibold">${sub.total}</td>
+                    <td class="text-center py-5">
+                        <span class="inline-block px-4 py-1 text-xs font-medium rounded-3xl 
+                            ${sub.grade === 'A' ? 'bg-emerald-100 text-emerald-700' : 
+                              sub.grade === 'B' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'}">
+                            ${sub.grade}
+                        </span>
+                    </td>
+                </tr>`;
+            });
+            
+            $('#results-table-body').html(tableHTML);
+        }
+
+        // Switch Term
+        function switchTerm(term) {
+            currentTerm = term;
+            
+            // Update active button
+            $('[id^="term-btn-"]').removeClass('bg-emerald-600 text-white');
+            \( (`#term-btn- \){term}`).addClass('bg-emerald-600 text-white');
+            
+            renderResults(term);
+        }
+
+        // Download Report Card
+        function downloadReportCard() {
+            showToast("Report card downloaded as PDF 📄", false);
+        }
+
+        // Share Report Card
+        function shareReportCard() {
+            showToast("Result shared via Eduka Parent Portal", false);
+        }
+
+        // Initialize Results Page
+        $(document).ready(function() {
+            renderResults(2); // Default to Term 2
+            
+            console.log('%c📊 Results Page Loaded Successfully', 'color:#10b981; font-weight:600');
+        });
+
+        // Global functions
+        window.toggleDarkMode = toggleDarkMode;
+        window.showToast = showToast;
+        window.switchTerm = switchTerm;
+        window.downloadReportCard = downloadReportCard;
+        window.shareReportCard = shareReportCard;
+    </script>
+</section>
