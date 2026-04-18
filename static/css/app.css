@@ -35,6 +35,8 @@
         .sub-modal.active {
             transform: translateX(0);
         }
+
+        
         
         .dark .sub-modal {
             background: #111827;
@@ -108,3 +110,7 @@
   #loader-text {
     color: var(--color-text);
   }
+
+  .dark {
+    color-scheme: dark;
+}

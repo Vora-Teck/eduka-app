@@ -142,7 +142,7 @@
                                 <input type="checkbox" class="w-4 h-4 accent-emerald-500">
                                 <span>Remember me</span>
                             </label>
-                            <span class="bio-login text-emerald-600 cursor-pointer">
+                            <span class="bio-login text-emerald-600">
                                   <i class="fa fa-fingerprint"></i>
                                   Use Fingerprint
                                 </span>
@@ -171,10 +171,7 @@
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight">Hello, <span class="std-name"></span></h1>
                     </div>
-                    <div  id="toggle-mode-btn" 
-                        class="w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
-                        <i id="theme-icon" class="fa-solid fa-moon text-xl"></i>
-                    </div>
+                    
                 </div>
             </div>
             <div class="px-6 pt-6 space-y-8">
@@ -612,20 +609,32 @@
                                 <i class="fa-solid fa-fingerprint text-2xl text-violet-600"></i>
                                 <div>
                                     <div class="font-medium">Enable Biometrics</div>
-                                    <div class="text-xs text-gray-500">Use fingerprint or face ID to login</div>
+                                    <div class="text-xs text-gray-500">Use fingerprint to login</div>
                                 </div>
                             </div>
                             <label class="relative inline-flex items-center">
                                 <input type="checkbox" id="biometrics-toggle" 
-                                       onclick="toggleBiometrics()" 
                                        class="sr-only peer">
                                 <div class="w-12 h-7 bg-gray-300 dark:bg-gray-600 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-emerald-300 rounded-3xl peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-3xl after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-600"></div>
                             </label>
                         </div>
+
+                        <div class="px-6 py-5 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-lightbulb text-2xl text-emerald-600"></i>
+                                <div>
+                                    <div class="font-medium">Light/Dark Mode</div>
+                                    <div class="text-xs text-gray-500">Toggle light/dark mode</div>
+                                </div>
+                            </div>
+                            <div id="toggle-mode-btn" 
+                                class="w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                                <i id="theme-icon" class="fa-solid fa-moon text-xl"></i>
+                            </div>
+                        </div>
         
                         <!-- Change Password -->
-                        <div onclick="showChangePasswordModal()" 
-                             class="px-6 py-5 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800">
+                        <div class="change-pass-btn px-6 py-5 flex items-center justify-between active:bg-gray-50 dark:active:bg-gray-800">
                             <div class="flex items-center gap-3">
                                 <i class="fa-solid fa-lock text-2xl text-amber-600"></i>
                                 <span class="font-medium">Change Password</span>
@@ -656,14 +665,13 @@
                 </div>
         
                 <!-- Logout -->
-                <button onclick="logout()" 
-                        class="logout-btn w-full bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 py-5 rounded-3xl font-semibold flex items-center justify-center gap-3 active:scale-95 transition">
+                <button class="logout-btn w-full bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 py-5 rounded-3xl font-semibold flex items-center justify-center gap-3 active:scale-95 transition">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Logout from Eduka</span>
                 </button>
         
                 <div class="text-center text-xs text-gray-400 pt-4">
-                    Eduka Student App v2.4.1 • © 2026
+                    EdukaLMS &copy; Vora-Teck
                 </div>
             </div>
         
@@ -712,10 +720,8 @@
                            class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-5 outline-none mb-8 text-base">
                     
                     <div class="flex gap-4">
-                        <button onclick="cancelBiometricsToggle()" 
-                                class="flex-1 py-4 border border-gray-300 dark:border-gray-600 font-medium rounded-3xl">Cancel</button>
-                        <button onclick="confirmBiometricsToggle()" 
-                                class="flex-1 py-4 bg-emerald-600 text-white font-semibold rounded-3xl">Confirm</button>
+                        <button class="close-bio-confirm flex-1 py-4 border border-gray-300 dark:border-gray-600 font-medium rounded-3xl">Cancel</button>
+                        <button class="open-bio-confirm flex-1 py-4 bg-emerald-600 text-white font-semibold rounded-3xl">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -745,10 +751,8 @@
                     </div>
                     
                     <div class="flex gap-4 mt-8">
-                        <button onclick="closeChangePasswordModal()" 
-                                class="flex-1 py-4 border border-gray-300 dark:border-gray-600 font-medium rounded-3xl">Cancel</button>
-                        <button onclick="saveNewPassword()" 
-                                class="flex-1 py-4 bg-emerald-600 text-white font-semibold rounded-3xl">Update Password</button>
+                        <button class="close-pass-con flex-1 py-4 border border-gray-300 dark:border-gray-600 font-medium rounded-3xl">Cancel</button>
+                        <button class="update-pass-btn flex-1 py-4 bg-emerald-600 text-white font-semibold rounded-3xl">Update Password</button>
                     </div>
                 </div>
             </div>

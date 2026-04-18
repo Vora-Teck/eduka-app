@@ -1,6 +1,7 @@
 import * as API from "./modules/api.js";
 import * as LOGIN from "./modules/login.js";
 import * as HOME from "./modules/dashboard.js";
+import { eduka_subjects } from "./modules/subjects.js";
 
 
 // ============= Startup Functions ===================
@@ -77,7 +78,9 @@ $(document).ready(async () => {
   // }
   await setup()
   
-  loadTheme()
+  //loadTheme()
+  initDarkMode();
+  setupSystemThemeListener();
   
   // Keyboard support for back
   document.addEventListener('keydown', function(e) {
@@ -89,25 +92,58 @@ $(document).ready(async () => {
   });
 });
 
-function loadTheme() {
-  // Load dark mode preference
-  if (localStorage.getItem('darkMode') === true) {
-    $('body').addClass('dark');
-    $('#theme-icon').removeClass('fa-moon').addClass('fa-sun');
+// ================Theme Loading & Switching ===========
+function initDarkMode() {
+  const savedMode = localStorage.getItem('eduka-dark-mode');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Priority: Saved preference > System preference > Light by default
+  if (savedMode === 'dark' || (savedMode === null && prefersDark)) {
+      document.documentElement.classList.add('dark');
+  } else {
+      document.documentElement.classList.remove('dark');
   }
-  else {
-    $('body').removeClass('dark');
-    $('#theme-icon').addClass('fa-moon').removeClass('fa-sun');
-  }
+  
+  updateAllThemeIcons();
 }
 
-// Dark Mode
 function toggleDarkMode() {
-  $('body').toggleClass('dark');
-  const isDark = $('body').hasClass('dark');
-  localStorage.setItem('darkMode', isDark);
-  loadTheme()
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('eduka-dark-mode', isDark ? 'dark' : 'light');
+  updateAllThemeIcons();
+  
+  // Optional: Show toast
+  showToast(isDark ? 'Dark mode enabled' : 'Light mode enabled', false);
 }
+
+function updateAllThemeIcons() {
+  const isDark = document.documentElement.classList.contains('dark');
+  
+  // Update all theme icons across pages
+  document.querySelectorAll('#theme-icon, #subjects-theme-icon, #profile-theme-icon, #attendance-theme-icon, #results-theme-icon, #tools-theme-icon, #fees-theme-icon').forEach(icon => {
+      if (icon) {
+          icon.classList.toggle('fa-moon', !isDark);
+          icon.classList.toggle('fa-sun', isDark);
+      }
+  });
+}
+
+// Listen for system preference changes (optional but recommended)
+function setupSystemThemeListener() {
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  mediaQuery.addEventListener('change', (e) => {
+      // Only change if user hasn't set a manual preference
+      if (localStorage.getItem('eduka-dark-mode') === null) {
+          if (e.matches) {
+              document.documentElement.classList.add('dark');
+          } else {
+              document.documentElement.classList.remove('dark');
+          }
+          updateAllThemeIcons();
+      }
+  });
+}
+
 
 // Flyout Menu
 function toggleFlyoutMenu() {
@@ -320,11 +356,12 @@ async function loadAllData() {
 // Sample Subjects Data
 let subjectsData = [];
 
+
 async function getSubjects() {
   //showLoader("Loading...")
   try {
     let data = await API.getSubjects()
-    console.log(data)
+    //console.log(data)
     if(data.status == "success") {
       subjectsData = data.data;
       await loadSubjects()     
@@ -348,7 +385,7 @@ async function loadSubjects() {
       <div data-id="${subject.id}"
            class="sub-item bg-white dark:bg-gray-900 rounded-3xl p-5 active:scale-95 transition cursor-pointer border border-transparent hover:border-emerald-200">
           <div class="flex justify-between items-start">
-              <div class="text-5xl mb-4">${subject.icon}</div>
+              <div class="text-5xl mb-4">${eduka_subjects[subject.slug]}</div>
               <div class="px-3 py-1 bg-${subject.color}-100 dark:bg-${subject.color}-900/30 text-${subject.color}-600 rounded-2xl text-xs font-medium">${subject.progress}%</div>
           </div>
           <h3 class="font-semibold text-xl mb-1">${subject.name}</h3>
@@ -617,7 +654,7 @@ async function loadProfile() {
   await loadBiometrics()
   try {
     let data = await API.userProfile()
-    console.log(data)
+    //console.log(data)
     if(data.status == "success") {
          let d = data.data
          $("#std-fname").html(d.firstName)
@@ -645,29 +682,65 @@ async function loadProfile() {
 }
 
 async function toggleBiometrics() {
-  let biometricsEnabled = await API.isBiometricEnabled();
-    const toggleEl = document.getElementById('biometrics-toggle');
-    if (toggleEl.checked && !biometricsEnabled) {
-        // Show password confirmation modal
-        $('#biometrics-confirm-modal').removeClass('hidden').addClass('flex');
-        toggleEl.checked = false; // Reset until confirmed
-    } else if (!toggleEl.checked && biometricsEnabled) {
-        // Disabling also requires confirmation
-        $('#biometrics-confirm-modal').removeClass('hidden').addClass('flex');
-        toggleEl.checked = true;
-    }
+  //let biometricsEnabled = await API.isBiometricEnabled();
+  $('#biometrics-confirm-modal').removeClass('hidden').addClass('flex');
 }
 
-function confirmBiometricsToggle() {
-    const enteredPass = $('#biometrics-password-input').val();
-    if (enteredPass === "demo1234") { // Demo password from login
-        biometricsEnabled = !biometricsEnabled;
-        document.getElementById('biometrics-toggle').checked = biometricsEnabled;
-        closeBiometricsModal();
-        showToast(biometricsEnabled ? 'Biometrics enabled successfully ✓' : 'Biometrics disabled', false);
-    } else {
-        showToast('Incorrect password. Try again.', true);
+async function toggleBiometric(password) {
+  //console.log(password)
+  let elem = $("#biometrics-toggle")
+  if(elem.is(':checked')) {
+    await API.updateBioLogin(false)
+    elem.prop('checked', false)
+    showToast("Biometric login disabled", false)
+  }
+  else {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ 
+          type: 'REGISTER_BIOMETRIC',
+          password: password
+        })
+      );
     }
+    else {
+      showToast("Native element not enabled", true)
+    }
+  }
+  //registerBiometric()
+}
+
+async function confirmBiometricsToggle() {
+  let password = $('#biometrics-password-input').val();
+  if(!password || password.trim() == "") {
+    showToast("Kindly enter your password", true);
+    return;
+  }
+  showLoader("Verifying...")
+    
+  try {
+    let data = await API.verifyPassword({password})
+    //console.log(data)
+    if(data.status == "success") {
+      if(data.verified === true) {
+        $("#password").val('')
+        $(".biometric-con").removeClass("active")
+        closeBiometricsModal();
+        await toggleBiometric(password)
+      }
+      else {
+        showToast("Incorrect password!", true)
+      }
+    }
+    else {
+      showToast(data.message, true)
+    }
+  }
+  catch(err) {
+    console.log(err)
+    showToast(err, true)
+  }
+  finally {hideLoader()}
 }
 
 function cancelBiometricsToggle() {
@@ -689,7 +762,7 @@ function closeChangePasswordModal() {
     $('#current-pass, #new-pass, #confirm-pass').val('');
 }
 
-function saveNewPassword() {
+async function saveNewPassword() {
     const current = $('#current-pass').val();
     const newPass = $('#new-pass').val();
     const confirmPass = $('#confirm-pass').val();
@@ -702,13 +775,42 @@ function saveNewPassword() {
         showToast('New passwords do not match', true);
         return;
     }
-    if (current !== "demo1234") {
-        showToast('Current password is incorrect', true);
-        return;
-    }
     
-    closeChangePasswordModal();
-    showToast('Password updated successfully! 🔐', false);
+    var formData = {
+      'old_password': current,
+      'new_password': newPass
+    }
+    showLoader("Updating password...")
+    try {
+      let data = await API.updatePassword(formData);
+      //console.log(data)
+      if(data.status == "success") {
+        let biometric = await API.isBiometricEnabled();
+        if(biometric == true) {
+          if (window.ReactNativeWebView) {
+            window.ReactNativeWebView.postMessage(
+              JSON.stringify({ 
+                type: 'REGISTER_BIOMETRIC',
+                password: newPass
+              })
+            );
+          }
+        }
+        closeChangePasswordModal();
+        showToast(data.message, false);
+      }
+      else {
+        showToast(data.message, true);
+      }
+    }
+    catch(err) {
+      console.log(err)
+      showToast(err?.message, true);
+    }
+    finally {hideLoader()}
+    
+    
+    
 }
 
 // Teacher Modal
@@ -722,13 +824,14 @@ function closeTeacherModal() {
 
 // Logout
 async function logout() {
-    //showLoader("Loading...")
+    showLoader("Logging out...")
   try {
     let data = await API.logout()
     //console.log(data)
     if(data.status == "success") {
       showToast(data.message, false)
       await navigateTo("#login-page");
+      await getSchools()
       await refreshLogin()  
     }
     else {
@@ -754,8 +857,14 @@ $(".close-sub-detail").on('click', closeSubjectDetail)
 $(".close-top-detail").on('click', closeTopicDetail)
 $(".close-ass-detail").on('click', closeAssignmentDetail)
 $(".close-std-tutor").on('click', closeTeacherModal)
+$(".close-bio-confirm").on('click', cancelBiometricsToggle)
+$(".open-bio-confirm").on('click', confirmBiometricsToggle)
 $(".logout-btn").on('click', logout)
+$(".change-pass-btn").on('click', showChangePasswordModal)
+$(".close-pass-con").on('click', closeChangePasswordModal)
+$(".update-pass-btn").on('click', saveNewPassword)
 $(".std-tutor-modal").on('click', openTeacherModal)
+$("#biometrics-toggle").on('click', (e) => {e.preventDefault(); toggleBiometrics()})
 
 $("#subject-tab-0").on('click', () => {switchSubjectTab(0)})
 $("#subject-tab-1").on('click', () => {switchSubjectTab(1)})
@@ -798,7 +907,7 @@ window.addEventListener('message', async function(ev) {
     else if (data && data.type === 'BIOMETRIC_REGISTERED') {
       await API.updateBioLogin(true)
       $("#biometrics-toggle").prop('checked', true)
-      showToast("Biometric login updated", false)
+      showToast("Biometric login enabled!", false)
     }
   } catch (e) {
           console.log(e)
