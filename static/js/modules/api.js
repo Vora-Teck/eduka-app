@@ -92,27 +92,25 @@ const request = async ({ method = 'GET', url, data = null, params = {}}) => {
     let response = await fetch(fullUrl, options);
     //console.log(response)
 
+    // If access token expired
+    if (response.status === 401) {
+      await clearUserInfo()
+      window.location.href = "#login-page";
+      await window.changeHash()
+    }
+
     if (!response.ok) {
       let responseData = {status: "error"}
       responseData['message'] = `Error ${response.status}: ${response.statusText}` || "";
       responseData['statusCode'] = response.status;
       return responseData;
     }
-
-    // If access token expired
-    //  if (response.status === 401) {
-    //    if(location.pathname !== '/login/')
-    //    window.location.href = "/login/";
-    //    return;
-    //  }
-
-    const contentType = response.headers.get('content-type');
-    const isJson = contentType && contentType.includes('application/json');
-    const responseData = isJson ? await response.json() : await response.text();
-
-    
-
-    return responseData;
+    else {
+      const contentType = response.headers.get('content-type');
+      const isJson = contentType && contentType.includes('application/json');
+      const responseData = isJson ? await response.json() : await response.text();
+      return responseData;
+    }
   }
   catch (error) {
     throw error;

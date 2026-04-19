@@ -33,19 +33,6 @@ JSON.stringify({
 }));
 
 
-// Register biometric
-window.ReactNativeWebView.postMessage(
-JSON.stringify({ 
-  type: 'REGISTER_BIOMETRIC',
-  password: "password"
-})
-);
-
-// biometric login
-window.ReactNativeWebView.postMessage(
-JSON.stringify({ 
-  type: 'REQUEST_BIOMETRIC_LOGIN'
-}));
 
 // Request link opening
 window.ReactNativeWebView.postMessage(
@@ -55,11 +42,6 @@ JSON.stringify({
 })
 );
 
-// request device info
-window.ReactNativeWebView.postMessage(
-JSON.stringify({ 
-  type: 'REQUEST_DEVICE_INFO'
-}));
 
 // request file saving
 window.ReactNativeWebView.postMessage(JSON.stringify({

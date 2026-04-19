@@ -305,6 +305,9 @@ function showSection(hash) {
   if (hash === '#intro-page' || hash === '#login-page') {
       $('#bottom-nav').hide();
       $("#main-app").addClass('hidden');
+  } else if (hash === '#chatroom-page') {
+    $('#bottom-nav').hide();
+    $("#main-app").removeClass('hidden');
   } else {
       $('#bottom-nav').show();
       $("#main-app").removeClass('hidden');
@@ -322,6 +325,7 @@ async function changeHash() {
   showSection(hash);
 }
 window.onhashchange = changeHash;
+window.changeHash = changeHash;
 //checkNetwork()
 
 

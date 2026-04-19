@@ -171,7 +171,9 @@
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight">Hello, <span class="std-name"></span></h1>
                     </div>
-                    
+                    <div class="reload-btn w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                        <i class="fa-solid fa-repeat text-xl"></i>
+                    </div>
                 </div>
             </div>
             <div class="px-6 pt-6 space-y-8">
@@ -335,183 +337,14 @@
             </div>
         </section>
 
-        <!-- SUBJECTS PAGE -->
-        <section id="subjects-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
-            
-            <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-2xl font-bold tracking-tight">My Subjects</h1>
-                    
-                </div>
-            </div>
-
-            <div class="px-6 pt-6">
-        
-                <!-- Search -->
-                <div class="relative mb-6">
-                    <input id="subject-search-input" 
-                           type="text" 
-                           placeholder="Search subjects or topics..." 
-                           class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:border-emerald-500 rounded-3xl px-6 py-4 text-base outline-none pl-12">
-                    <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                </div>
-        
-                <!-- Subjects Grid -->
-                <div id="subjects-grid" class="grid grid-cols-2 gap-4">
-                    <!-- Populated dynamically by JS -->
-                </div>
-            </div>
-        
-            <!-- ==================== SUBJECT DETAIL MODAL (Full-screen) ==================== -->
-            <div id="subject-detail-modal" 
-                 class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
-                
-                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4 bg-white dark:bg-gray-900">
-                    <button class="close-sub-detail text-3xl text-gray-400 hover:text-gray-600">←</button>
-                    <div id="subject-detail-header" class="flex-1">
-                        <div class="flex items-center gap-3">
-                            <div id="subject-detail-icon" class="text-3xl"></div>
-                            <div>
-                                <h2 id="subject-detail-name" class="font-bold text-2xl"></h2>
-                                <p id="subject-detail-progress-text" class="text-sm text-emerald-600"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Tabs -->
-                <div class="flex border-b dark:border-gray-700 bg-white dark:bg-gray-900 sticky top-0 z-10">
-                    <button id="subject-tab-0"
-                            class="flex-1 py-4 text-center font-medium border-b-2 border-emerald-600 text-emerald-600">Progress</button>
-                    <button id="subject-tab-1"
-                            class="flex-1 py-4 text-center font-medium text-gray-500">Tutor</button>
-                    <button id="subject-tab-2"
-                            class="flex-1 py-4 text-center font-medium text-gray-500">Topics</button>
-                    <button id="subject-tab-3"
-                            class="switch-sub-tab flex-1 py-4 text-center font-medium text-gray-500">Assignments</button>
-                </div>
-        
-                <!-- Tab Contents -->
-                <div class="flex-1 overflow-auto p-6" id="subject-tab-content">
-                    <!-- Dynamically switched by JS -->
-                </div>
-            </div>
-        
-            <!-- ==================== TOPIC DETAIL MODAL ==================== -->
-            <div id="topic-detail-modal" 
-                 class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[10000] flex flex-col">
-                
-                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
-                    <button class="close-top-detail text-3xl text-gray-400 hover:text-gray-600">←</button>
-                    <h2 id="topic-detail-title" class="font-semibold text-xl flex-1"></h2>
-                </div>
-        
-                <div class="flex-1 overflow-auto p-6 space-y-8">
-                    
-                    <!-- Description -->
-                    <div>
-                        <h3 class="text-sm font-medium text-gray-500 mb-2">DESCRIPTION</h3>
-                        <p id="topic-description" class="text-gray-700 dark:text-gray-300 leading-relaxed"></p>
-                    </div>
-        
-                    <!-- Learning Objectives -->
-                    <div>
-                        <h3 class="text-sm font-medium text-gray-500 mb-3">LEARNING OBJECTIVES</h3>
-                        <ul id="topic-objectives" class="space-y-3 text-sm">
-                            <!-- Populated by JS -->
-                        </ul>
-                    </div>
-        
-                    <!-- Topic Content -->
-                    <div>
-                        <h3 class="text-sm font-medium text-gray-500 mb-3">LESSON CONTENT</h3>
-                        <div id="topic-content" class="prose dark:prose-invert bg-gray-50 dark:bg-gray-800 p-5 rounded-3xl text-sm leading-relaxed">
-                            <!-- Rich HTML content populated by JS -->
-                        </div>
-                    </div>
-        
-                    <!-- Quiz Section -->
-                    <div class="bg-amber-50 dark:bg-amber-900/30 rounded-3xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-semibold flex items-center gap-2">
-                                <i class="fa-solid fa-question-circle text-amber-600"></i>
-                                Quick Quiz
-                            </h3>
-                            <span id="quiz-score" class="text-xs bg-white dark:bg-gray-900 px-3 py-1 rounded-2xl font-medium hidden">Score: 0/3</span>
-                        </div>
-                        
-                        <div id="quiz-container">
-                            <!-- Quiz questions populated by JS -->
-                        </div>
-                        
-                        <button id="quiz-submit-btn"
-                                class="mt-6 w-full bg-emerald-600 text-white py-4 rounded-2xl font-semibold hidden">
-                            Submit Quiz
-                        </button>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- ==================== ASSIGNMENT DETAIL MODAL ==================== -->
-            <div id="assignment-detail-modal" 
-                 class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[10000] flex flex-col">
-                
-                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
-                    <button class="close-ass-detail text-3xl text-gray-400 hover:text-gray-600">←</button>
-                    <h2 id="assignment-detail-title" class="font-semibold text-xl flex-1"></h2>
-                </div>
-        
-                <!-- Assignment Tabs -->
-                <div class="flex border-b dark:border-gray-700 bg-white dark:bg-gray-900">
-                    <button id="assign-tab-0"
-                            class="flex-1 py-4 text-center font-medium border-b-2 border-emerald-600 text-emerald-600">Overview</button>
-                    <button id="assign-tab-1"
-                            class="flex-1 py-4 text-center font-medium text-gray-500">Submit</button>
-                    <button id="assign-tab-2"
-                            class="flex-1 py-4 text-center font-medium text-gray-500">Feedback</button>
-                </div>
-        
-                <div class="flex-1 overflow-auto p-6" id="assignment-tab-content">
-                    <!-- Switched by JS -->
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Other main pages (placeholders for now) -->
-        <section id="timetable-page" class="section p-6 pb-24">
-            <h1 class="text-3xl font-bold mb-6">Timetable</h1>
-            <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 text-center py-20">
-                <p class="text-gray-400">Timetable view coming soon...</p>
-            </div>
-        </section>
-
-        <section id="attendance-page" class="section p-6 pb-24">
-            <h1 class="text-3xl font-bold mb-6">Attendance</h1>
-            <div class="text-center py-20 text-gray-400">Coming Soon!</div>
-        </section>
-
-        <section id="fees-page" class="section p-6 pb-24">
-            <h1 class="text-3xl font-bold mb-6">Fees</h1>
-            <div class="text-center py-20 text-gray-400">Coming Soon!</div>
-        </section>
-
-        <section id="results-page" class="section p-6 pb-24">
-            <h1 class="text-3xl font-bold mb-6">Results</h1>
-            <div class="text-center py-20 text-gray-400">Coming Soon!</div>
-        </section>
-
-        <section id="chatroom-page" class="section p-6 pb-24">
-            <h1 class="text-3xl font-bold mb-6">Class Group</h1>
-            <div class="text-center py-20 text-gray-400">Coming Soon!</div>
-        </section>
-
         <section id="profile-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
             
             <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
                 <div class="flex items-center justify-between">
                     <h1 class="text-2xl font-bold tracking-tight">My Profile</h1>
-                    
+                    <div class="reload-btn w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                        <i class="fa-solid fa-repeat text-xl"></i>
+                    </div>
                 </div>
             </div>
 
@@ -757,6 +590,680 @@
                 </div>
             </div>
 
+        </section>
+
+        <!-- SUBJECTS PAGE -->
+        <section id="subjects-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+            
+            <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-bold tracking-tight">My Subjects</h1>
+                    <div class="reload-btn w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                        <i class="fa-solid fa-repeat text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 pt-6">
+        
+                <!-- Search -->
+                <div class="relative mb-6">
+                    <input id="subject-search-input" 
+                           type="text" 
+                           placeholder="Search subjects or topics..." 
+                           class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:border-emerald-500 rounded-3xl px-6 py-4 text-base outline-none pl-12">
+                    <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+        
+                <!-- Subjects Grid -->
+                <div id="subjects-grid" class="grid grid-cols-2 gap-4">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+        
+            <!-- ==================== SUBJECT DETAIL MODAL (Full-screen) ==================== -->
+            <div id="subject-detail-modal" 
+                 class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+                
+                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4 bg-white dark:bg-gray-900">
+                    <button class="close-sub-detail text-3xl text-gray-400 hover:text-gray-600">←</button>
+                    <div id="subject-detail-header" class="flex-1">
+                        <div class="flex items-center gap-3">
+                            <div id="subject-detail-icon" class="text-3xl"></div>
+                            <div>
+                                <h2 id="subject-detail-name" class="font-bold text-2xl"></h2>
+                                <p id="subject-detail-progress-text" class="text-sm text-emerald-600"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Tabs -->
+                <div class="flex border-b dark:border-gray-700 bg-white dark:bg-gray-900 sticky top-0 z-10">
+                    <button id="subject-tab-0"
+                            class="flex-1 py-4 text-center font-medium border-b-2 border-emerald-600 text-emerald-600">Progress</button>
+                    <button id="subject-tab-1"
+                            class="flex-1 py-4 text-center font-medium text-gray-500">Tutor</button>
+                    <button id="subject-tab-2"
+                            class="flex-1 py-4 text-center font-medium text-gray-500">Topics</button>
+                    <button id="subject-tab-3"
+                            class="switch-sub-tab flex-1 py-4 text-center font-medium text-gray-500">Assignments</button>
+                </div>
+        
+                <!-- Tab Contents -->
+                <div class="flex-1 overflow-auto p-6" id="subject-tab-content">
+                    <!-- Dynamically switched by JS -->
+                </div>
+            </div>
+        
+            <!-- ==================== TOPIC DETAIL MODAL ==================== -->
+            <div id="topic-detail-modal" 
+                 class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[10000] flex flex-col">
+                
+                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+                    <button class="close-top-detail text-3xl text-gray-400 hover:text-gray-600">←</button>
+                    <h2 id="topic-detail-title" class="font-semibold text-xl flex-1"></h2>
+                </div>
+        
+                <div class="flex-1 overflow-auto p-6 space-y-8">
+                    
+                    <!-- Description -->
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-2">DESCRIPTION</h3>
+                        <p id="topic-description" class="text-gray-700 dark:text-gray-300 leading-relaxed"></p>
+                    </div>
+        
+                    <!-- Learning Objectives -->
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-3">LEARNING OBJECTIVES</h3>
+                        <ul id="topic-objectives" class="space-y-3 text-sm">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+        
+                    <!-- Topic Content -->
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-3">LESSON CONTENT</h3>
+                        <div id="topic-content" class="prose dark:prose-invert bg-gray-50 dark:bg-gray-800 p-5 rounded-3xl text-sm leading-relaxed">
+                            <!-- Rich HTML content populated by JS -->
+                        </div>
+                    </div>
+        
+                    <!-- Quiz Section -->
+                    <div class="bg-amber-50 dark:bg-amber-900/30 rounded-3xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold flex items-center gap-2">
+                                <i class="fa-solid fa-question-circle text-amber-600"></i>
+                                Quick Quiz
+                            </h3>
+                            <span id="quiz-score" class="text-xs bg-white dark:bg-gray-900 px-3 py-1 rounded-2xl font-medium hidden">Score: 0/3</span>
+                        </div>
+                        
+                        <div id="quiz-container">
+                            <!-- Quiz questions populated by JS -->
+                        </div>
+                        
+                        <button id="quiz-submit-btn"
+                                class="mt-6 w-full bg-emerald-600 text-white py-4 rounded-2xl font-semibold hidden">
+                            Submit Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- ==================== ASSIGNMENT DETAIL MODAL ==================== -->
+            <div id="assignment-detail-modal" 
+                 class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[10000] flex flex-col">
+                
+                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4">
+                    <button class="close-ass-detail text-3xl text-gray-400 hover:text-gray-600">←</button>
+                    <h2 id="assignment-detail-title" class="font-semibold text-xl flex-1"></h2>
+                </div>
+        
+                <!-- Assignment Tabs -->
+                <div class="flex border-b dark:border-gray-700 bg-white dark:bg-gray-900">
+                    <button id="assign-tab-0"
+                            class="flex-1 py-4 text-center font-medium border-b-2 border-emerald-600 text-emerald-600">Overview</button>
+                    <button id="assign-tab-1"
+                            class="flex-1 py-4 text-center font-medium text-gray-500">Submit</button>
+                    <button id="assign-tab-2"
+                            class="flex-1 py-4 text-center font-medium text-gray-500">Feedback</button>
+                </div>
+        
+                <div class="flex-1 overflow-auto p-6" id="assignment-tab-content">
+                    <!-- Switched by JS -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Other main pages (placeholders for now) -->
+        <section id="timetable-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+            <!-- Header -->
+            <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-3xl font-bold tracking-tight">Timetable</h1>
+                    <div class="flex items-center gap-3">
+                        <button id="view-mode-btn"
+                                class="px-5 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl text-sm font-medium flex items-center gap-2 active:scale-95 transition">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span id="view-mode-text">Weekly</span>
+                        </button>
+                        <div class="reload-btn w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                            <i class="fa-solid fa-repeat text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 pt-6">
+        
+                <!-- Day Selector -->
+                <div class="flex gap-2 overflow-x-auto pb-4 scrollbar-hide" id="day-selector">
+                    <!-- Populated by JS -->
+                </div>
+        
+                <!-- Timetable Content -->
+                <div id="timetable-content" class="space-y-6">
+                    <!-- Dynamically loaded by JS -->
+                </div>
+            </div>
+        
+            <!-- ==================== PERIOD DETAIL MODAL ==================== -->
+            <div id="period-detail-modal" 
+                 class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+                
+                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4 bg-white dark:bg-gray-900">
+                    <button class="close-period-btn text-3xl text-gray-400 hover:text-gray-600">←</button>
+                    <div class="flex-1">
+                        <h2 id="modal-period-time" class="font-bold text-2xl"></h2>
+                        <p id="modal-period-subject" class="text-emerald-600 font-medium"></p>
+                    </div>
+                </div>
+        
+                <div class="flex-1 overflow-auto p-6 space-y-8">
+                    
+                    <!-- Class Information -->
+                    <div class="bg-white dark:bg-gray-800 rounded-3xl p-6">
+                        <div class="grid grid-cols-2 gap-6 text-sm">
+                            <div>
+                                <span class="text-gray-500 block mb-1">Teacher</span>
+                                <span id="modal-teacher" class="font-medium"></span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block mb-1">Room</span>
+                                <span id="modal-room" class="font-medium"></span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block mb-1">Duration</span>
+                                <span id="modal-duration" class="font-medium"></span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block mb-1">Type</span>
+                                <span id="modal-type" class="font-medium text-emerald-600"></span>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Quick Actions -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <button onclick="showToast('Opening lesson notes...')" 
+                                class="bg-white dark:bg-gray-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-gray-200 dark:border-gray-700 rounded-3xl py-6 flex flex-col items-center gap-2 active:scale-95 transition">
+                            <i class="fa-solid fa-book text-2xl text-emerald-600"></i>
+                            <span class="text-sm font-medium">Lesson Notes</span>
+                        </button>
+                        
+                        <button onclick="showToast('Opening class materials...')" 
+                                class="bg-white dark:bg-gray-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 border border-gray-200 dark:border-gray-700 rounded-3xl py-6 flex flex-col items-center gap-2 active:scale-95 transition">
+                            <i class="fa-solid fa-folder-open text-2xl text-violet-600"></i>
+                            <span class="text-sm font-medium">Materials</span>
+                        </button>
+                    </div>
+        
+                    <!-- Today's Topic -->
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-3">TODAY'S TOPIC</h3>
+                        <div id="modal-topic" 
+                             class="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 p-6 rounded-3xl">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="attendance-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+            <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                <h1 class="text-3xl font-bold tracking-tight">Attendance</h1>
+                <div class="reload-btn w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                    <i class="fa-solid fa-repeat text-xl"></i>
+                </div>
+            </div>
+
+            <div class="px-6 pt-6 space-y-8">
+
+                <!-- Overall Metrics -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <div class="text-sm font-medium text-gray-500">TERM 2 • 2025/2026</div>
+                            <h2 class="text-2xl font-semibold">Overall Attendance</h2>
+                        </div>
+                        <!-- Progress Ring -->
+                        <div class="relative">
+                            <svg class="w-28 h-28 -rotate-12" viewBox="0 0 42 42">
+                                <circle cx="21" cy="21" r="15" fill="none" stroke="#e5e7eb" stroke-width="6"></circle>
+                                <circle cx="21" cy="21" r="15" fill="none" stroke="#10b981" 
+                                        stroke-width="6" stroke-dasharray="94.2" 
+                                        stroke-dashoffset="7.536" stroke-linecap="round"></circle>
+                            </svg>
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                                <div class="text-3xl font-bold text-emerald-600">92%</div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-3xl font-semibold text-emerald-600">28</div>
+                            <div class="text-xs text-gray-500">Days Present</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-semibold text-red-500">3</div>
+                            <div class="text-xs text-gray-500">Days Absent</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-semibold">31</div>
+                            <div class="text-xs text-gray-500">School Days</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Filters -->
+                <div class="flex gap-3">
+        
+                    <!-- Week Filter -->
+                    <select id="week-filter" 
+                            class="flex-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-3xl px-5 py-4 text-base outline-none">
+                        <option value="all">All Weeks</option>
+                        <option value="week1">Week 1</option>
+                        <option value="week2">Week 2</option>
+                        <option value="week3">Week 3</option>
+                        <option value="week4">Week 4</option>
+                        <option value="week5">Week 5</option>
+                        <option value="week6">Week 6</option>
+                        <option value="week7">Week 7</option>
+                        <option value="week8" selected>Week 8 (Current)</option>
+                    </select>
+                </div>
+        
+                <!-- Weekly Summary -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-500 mb-4 px-1">Weekly Summary</h3>
+                    <div id="weekly-grid" class="grid grid-cols-3 gap-3">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+        
+                <!-- Detailed Register -->
+                <div>
+                    <div class="flex justify-between items-center mb-4 px-1">
+                        <h3 class="text-sm font-semibold text-gray-500">Daily Register</h3>
+                        <span onclick="exportAttendance()" class="text-xs text-emerald-600 flex items-center gap-1 cursor-pointer">
+                            <i class="fa-solid fa-download"></i> Export PDF
+                        </span>
+                    </div>
+                    
+                    <div id="attendance-register" class="bg-white dark:bg-gray-900 rounded-3xl divide-y divide-gray-100 dark:divide-gray-700">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+        
+            </div>
+
+        </section>
+
+        <section id="results-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+            <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                <h1 class="text-3xl font-bold tracking-tight">My Results</h1>
+                <div class="reload-btn w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                    <i class="fa-solid fa-repeat text-xl"></i>
+                </div>
+            </div>
+
+            <div class="px-6 pt-6 space-y-8">
+
+                <div class="flex gap-3">
+        
+                    <!-- Session Filter -->
+                    <select id="result-session-filter" 
+                            class="flex-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-3xl px-5 py-4 text-base outline-none">
+                        
+                        <option value="week1" selected>2025/2026 Session</option>
+                        <option value="week1">2026/2027 Session</option>
+                    </select>
+                </div>
+
+                <!-- Term Filter -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-2 flex">
+                    <button id="term-btn-1"
+                            class="flex-1 py-4 text-sm font-semibold rounded-3xl bg-emerald-600 text-white transition-all">Term 1</button>
+                    <button id="term-btn-2"
+                            class="flex-1 py-4 text-sm font-semibold rounded-3xl transition-all">Term 2</button>
+                    <button id="term-btn-3"
+                            class="flex-1 py-4 text-sm font-semibold rounded-3xl transition-all">Term 3</button>
+                </div>
+        
+                <!-- Report Card -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm">
+        
+                    <!-- Report Card Header -->
+                    <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="text-xs opacity-75">STUDENT REPORT CARD</div>
+                                <div id="student-name" class="text-2xl font-bold">Hassan Olamide Adeyemi</div>
+                                <div id="student-class" class="p-3 text-sm opacity-90">SS2 Science • STU-20241234</div>
+                                <div id="report-term" class="p-3 text-lg font-semibold">Term 2 • 2025/2026</div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Results Table -->
+                    <div class="p-6">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-4 text-xs font-medium text-gray-500">SUBJECT</th>
+                                    <th class="text-center py-4 text-xs font-medium text-gray-500">TEST</th>
+                                    <th class="text-center py-4 text-xs font-medium text-gray-500">EXAM</th>
+                                    <th class="text-center py-4 text-xs font-medium text-gray-500">TOTAL</th>
+                                    <th class="text-center py-4 text-xs font-medium text-gray-500">GRADE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-table-body" class="text-sm">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+        
+                    <!-- Summary Footer -->
+                    <div class="border-t border-gray-100 dark:border-gray-700 px-6 py-5 flex justify-between items-center bg-gray-50 dark:bg-gray-800">
+                        <div>
+                            <div class="text-xs text-gray-500">OVERALL PERFORMANCE</div>
+                            <div id="overall-percentage" class="text-4xl font-bold text-emerald-600">84%</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-gray-500">CLASS POSITION</div>
+                            <div class="font-semibold">5th out of 32</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-1 gap-4">
+                    <button class="download-rep-btn bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-emerald-600 py-5 rounded-3xl font-semibold flex items-center justify-center gap-3 active:scale-95 transition">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Report Card</span>
+                    </button>
+                </div>
+        
+                <!-- Remarks -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6">
+                    <h3 class="text-sm font-medium text-gray-500 mb-3">TEACHER'S REMARK</h3>
+                    <p id="teacher-remark" class="italic text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Hassan continues to show strong potential in Science subjects. He needs to improve consistency in Mathematics and submit assignments on time. Overall performance is good.
+                    </p>
+                    <div class="mt-6 text-right text-xs text-gray-500">
+                        — Mrs. Adebayo (Class Teacher)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fees-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+            <div class="px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                <h1 class="text-3xl font-bold tracking-tight">School Fees</h1>
+                <div class="reload-btn w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center active:scale-95 transition">
+                    <i class="fa-solid fa-repeat text-xl"></i>
+                </div>
+            </div>
+
+            <div class="px-6 pt-6 space-y-8">
+
+                <!-- Filters -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <!-- Term Filter -->
+                    <div class="flex-1">
+                        <label class="block text-xs font-medium text-gray-500 mb-2">TERM</label>
+                        <select id="fee-term-filter"
+                                class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-3xl px-5 py-4 outline-none text-base">
+                            <option value="all">All Terms</option>
+                            <option value="1">Term 2 - 2025/2026 Session</option>
+                            <option value="2">Term 1 - 2025/2026 Session</option>
+                            <option value="3">Term 3 - 2024/2025 Session</option>
+                        </select>
+                    </div>
+                    
+                </div>
+        
+                <!-- Fees List -->
+                <div id="fees-list" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+        
+                <!-- Summary Footer -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 text-center">
+                    <div class="text-sm text-gray-500">Total Outstanding</div>
+                    <div id="total-outstanding" class="text-4xl font-bold text-red-500 mt-1">₦48,500</div>
+                </div>
+            </div>
+        
+            <!-- ==================== FEE DETAIL MODAL ==================== -->
+            <div id="fee-detail-modal" class="hidden fixed inset-0 bg-white dark:bg-gray-900 z-[9999] flex flex-col">
+        
+                <div class="px-5 py-4 border-b dark:border-gray-700 flex items-center gap-4 bg-white dark:bg-gray-900">
+                    <button class="close-fees-btn text-3xl text-gray-400 hover:text-gray-600">←</button>
+                    <div class="flex-1">
+                        <h2 id="modal-term-title" class="font-bold text-2xl"></h2>
+                        <p id="modal-fee-status" class="text-sm"></p>
+                    </div>
+                </div>
+        
+                <div class="flex-1 overflow-auto px-6 py-6 space-y-8">
+                    
+                    <!-- Fee Breakdown -->
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-3">FEE BREAKDOWN</h3>
+                        <div id="breakdown-list" class="bg-white dark:bg-gray-800 rounded-3xl divide-y divide-gray-100 dark:divide-gray-700">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+        
+                    <!-- Payment Summary -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white dark:bg-gray-800 rounded-3xl p-5">
+                            <div class="text-xs text-gray-500">Total Amount</div>
+                            <div id="modal-total-amount" class="text-3xl font-semibold"></div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-3xl p-5">
+                            <div class="text-xs text-gray-500">Outstanding</div>
+                            <div id="modal-outstanding" class="text-3xl font-semibold text-red-500"></div>
+                        </div>
+                    </div>
+        
+                    <!-- Transactions -->
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-sm font-medium text-gray-500">TRANSACTIONS</h3>
+                            <button id="fees-pay-button"
+                                    class="text-emerald-600 text-sm font-medium flex items-center gap-1">
+                                <i class="fa-solid fa-credit-card"></i> Make Payment
+                            </button>
+                        </div>
+                        
+                        <div id="transactions-list" class="space-y-3">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- ==================== MAKE PAYMENT MODAL ==================== -->
+            <div id="payment-modal" class="hidden fixed inset-0 bg-black/70 flex items-end z-[10000]">
+                <div class="bg-white dark:bg-gray-900 w-full rounded-t-3xl p-6">
+                    <h3 class="font-semibold text-2xl mb-6">Make Payment</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-2">PAYING FOR</label>
+                            <div id="payment-for" class="font-medium"></div>
+                        </div>
+        
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-2">Amount to Pay (₦)</label>
+                            <input id="payment-amount" type="text" 
+                                   class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-5 text-4xl font-semibold outline-none text-center">
+                        </div>
+        
+                        <div class="text-xs text-gray-500 flex justify-between">
+                            <span>Outstanding</span>
+                            <span id="payment-outstanding-display" class="font-medium text-red-500"></span>
+                        </div>
+        
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-2">Available Payment Methods</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button class="payment-method-btn active bg-white dark:bg-gray-800 border border-emerald-600 rounded-3xl py-4 text-center"><i class="fa-solid fa-bank"></i> Bank Transfer</button>
+                                <button class="payment-method-btn bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl py-4 text-center"><i class="fa-solid fa-credit-card"></i> Card</button>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="flex gap-4 mt-10">
+                        <button class="close-pay-btn flex-1 py-4 border border-gray-300 dark:border-gray-600 rounded-3xl font-medium">Cancel</button>
+                        <button class="pay-fees-btn flex-1 py-4 bg-emerald-600 text-white font-semibold rounded-3xl">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="chatroom-page" class="section bg-gray-50 dark:bg-gray-950 min-h-screen pb-24">
+            <div class="sticky top-0 z-50 px-6 pt-8 pb-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 flex items-center gap-4">
+                <a href="#dashboard-page" class="text-3xl text-gray-400 hover:text-gray-600">←</a>
+                
+                <div class="flex-1">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 bg-emerald-100 dark:bg-emerald-900 rounded-2xl flex items-center justify-center text-2xl">👥</div>
+                        <div>
+                            <h1 class="font-bold text-1xl tracking-tight">SS2 Science</h1>
+                            <div class="flex items-center text-xs text-emerald-600">
+                                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse mr-1"></div>
+                                28 online • 34 members
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Header Dropdown -->
+                <div class="relative">
+                    <button class="toggle-chat-dropdown w-10 h-10 flex items-center justify-center text-2xl text-gray-400 hover:text-gray-700 active:scale-95 transition">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    
+                    <div id="chat-dropdown-menu" 
+                         class="hidden absolute right-0 top-12 bg-white dark:bg-gray-900 shadow-2xl rounded-3xl py-2 w-56 z-50 border border-gray-100 dark:border-gray-700">
+                        <button class="view-chat-members w-full px-6 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-3">
+                            <i class="fa-solid fa-users text-emerald-600"></i>
+                            <span>View Members</span>
+                        </button>
+                        <button class="starred-btn w-full px-6 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-3">
+                            <i class="fa-solid fa-star text-amber-500"></i>
+                            <span>Starred Messages</span>
+                        </button>
+                        <div class="h-px bg-gray-100 dark:bg-gray-700 my-1 mx-4"></div>
+                        <button class="clear-chat-btn w-full px-6 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-3 text-red-500">
+                            <i class="fa-solid fa-trash"></i>
+                            <span>Clear Chat</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAT BODY -->
+            <div id="chat-body" class="flex-1 overflow-auto p-6 space-y-7 pb-28 bg-[radial-gradient(#f1f5f9_1px,transparent_1px)] dark:bg-[radial-gradient(#1e2937_1px,transparent_1px)] bg-[length:40px_40px]">
+                <!-- Messages populated by JS -->
+            </div>
+
+            <!-- INPUT AREA -->
+            <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-4 pt-3 pb-8 z-50">
+                <div class="max-w-md mx-auto">
+                    
+                    <!-- Preview area for attachments -->
+                    <div id="attachment-preview" class="hidden mb-3 flex gap-3"></div>
+
+                    <div class="flex items-end gap-3 bg-gray-100 dark:bg-gray-800 rounded-3xl px-4 py-2">
+                        
+                        <!-- Emoji Button -->
+                        <button onclick="toggleEmojiPicker()" class="text-3xl text-gray-400 hover:text-gray-600 active:scale-95 transition pb-1">
+                            🙂
+                        </button>
+
+                        <!-- Attach Button -->
+                        <button onclick="triggerFileUpload()" class="text-3xl text-gray-400 hover:text-gray-600 active:scale-95 transition pb-1">
+                            <i class="fa-solid fa-paperclip"></i>
+                        </button>
+
+                        <!-- Hidden file input -->
+                        <input type="file" id="chat-file-input" accept="image/*,video/*,audio/*,.pdf,.doc,.docx" class="hidden" multiple>
+
+                        <!-- Textarea -->
+                        <textarea id="message-input" 
+                                rows="1"
+                                placeholder="Message..."
+                                class="flex-1 bg-transparent outline-none resize-none max-h-32 text-base py-3 px-2 leading-tight dark:text-gray-100"
+                                ></textarea>
+
+                        <!-- Send Button -->
+                        <button class="send-message-btn w-10 h-10 bg-emerald-600 text-white rounded-2xl flex items-center justify-center active:scale-95 transition">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+
+                    <!-- Emoji Picker -->
+                    <div id="emoji-picker" class="hidden absolute bottom-28 left-4 right-4 bg-white dark:bg-gray-900 shadow-2xl rounded-3xl p-4 grid grid-cols-8 gap-2 text-3xl border border-gray-200 dark:border-gray-700">
+                        <!-- Populated by JS with common emojis -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEMBERS MODAL -->
+            <div id="members-modal" class="hidden fixed inset-0 bg-black/70 flex items-end z-[9999]">
+                <div class="bg-white dark:bg-gray-900 w-full rounded-t-3xl max-h-[80vh] flex flex-col">
+                    <div class="px-6 py-5 border-b flex items-center justify-between">
+                        <h3 class="font-semibold text-2xl">Class Members (34)</h3>
+                        <button class="close-mem-modal text-3xl text-gray-400">✕</button>
+                    </div>
+                    
+                    <div class="flex-1 overflow-auto px-6 py-4 space-y-4" id="members-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- STARRED MESSAGES MODAL -->
+            <div id="starred-modal" class="hidden fixed inset-0 bg-black/70 flex items-end z-[9999]">
+                <div class="bg-white dark:bg-gray-900 w-full rounded-t-3xl max-h-[80vh] flex flex-col">
+                    <div class="px-6 py-5 border-b flex justify-between">
+                        <h3 class="font-semibold text-2xl">Starred Messages</h3>
+                        <button class="close-starred-modal text-3xl text-gray-400">✕</button>
+                    </div>
+                    <div class="flex-1 overflow-auto p-6 space-y-6" id="starred-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- BOTTOM NAVIGATION -->
